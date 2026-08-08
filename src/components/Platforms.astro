@@ -1,0 +1,37 @@
+---
+import { links, platforms } from '../content/site';
+---
+
+<section id="platforms" class="section-pad pt-0">
+  <div class="container-shell">
+    <div class="section-intro max-w-2xl">
+      <p class="eyebrow">Platforms</p>
+      <h2 class="headline mt-3">Trading platforms built for your success</h2>
+      <p class="lede mt-4">
+        Access powerful tools for analysis, execution, and portfolio control — desktop, web, and
+        mobile.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-5 lg:grid-cols-3">
+      {
+        platforms.map((platform) => (
+          <article
+            data-spotlight
+            class="platform-card spotlight-card group rounded-2xl border border-line bg-gradient-to-b from-white to-mist/60 p-7 transition duration-300 hover:-translate-y-1.5 hover:border-ocean/30 hover:shadow-[0_20px_45px_rgba(7,24,34,0.1)]"
+          >
+            <span class="rounded-full bg-ocean/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-ocean transition group-hover:bg-ocean group-hover:text-white">
+              {platform.badge}
+            </span>
+            <h3 class="mt-4 font-display text-2xl font-bold text-ink">{platform.name}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-muted">{platform.copy}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="mt-8">
+      <a href={links.register} class="btn-secondary btn-magnetic">View Trading Platforms</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,375 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { brand, links } from '../content/site';
+import { promotion as promo } from '../content/promotion';
+---
+
+<Layout
+  title={`${promo.title} | ${brand.name}`}
+  description={promo.subtitle}
+  bodyClass="promo-page"
+>
+  <header class="promo-header fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
+    <div
+      class="mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white px-4 py-3 shadow-[0_16px_40px_rgba(0,0,0,0.25)] sm:px-5"
+    >
+      <a href="/" class="flex items-center gap-2.5" aria-label={`${brand.name} home`}>
+        <span class="grid h-9 w-9 place-items-center rounded-full bg-ocean text-sm font-bold text-white"
+          >{brand.mark}</span
+        >
+        <span class="font-display text-lg font-extrabold tracking-[0.08em] text-ink">{brand.name}</span>
+      </a>
+
+      <nav class="hidden items-center gap-6 md:flex" aria-label="Promotion">
+        <a href="#how-it-works" class="text-sm font-medium text-ink-soft/80 hover:text-ocean"
+          >How It Works</a
+        >
+        <a href="#the-bonus" class="text-sm font-medium text-ink-soft/80 hover:text-ocean"
+          >The Bonus</a
+        >
+        <a href="#terms" class="text-sm font-medium text-ink-soft/80 hover:text-ocean">Terms</a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <a href={promo.loginHref} class="btn-secondary hidden px-4 py-2.5 sm:inline-flex">Log In</a>
+        <a href={promo.ctaHref} class="btn-primary px-4 py-2.5">Sign Up</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="promo-main">
+    <!-- Hero -->
+    <section class="relative overflow-hidden px-5 pb-10 pt-28 sm:px-8 lg:px-12 lg:pt-32">
+      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div class="absolute -left-20 top-10 h-72 w-72 rounded-full bg-signal/20 blur-3xl"></div>
+        <div class="absolute -right-10 top-40 h-80 w-80 rounded-full bg-ocean/30 blur-3xl"></div>
+      </div>
+
+      <div class="relative mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+        <div>
+          <p
+            class="inline-flex items-center gap-2 rounded-full border border-signal/30 bg-signal/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-signal"
+          >
+            <span class="h-1.5 w-1.5 rounded-full bg-signal"></span>
+            {promo.badge}
+          </p>
+          <h1 class="mt-5 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-[#e8c87a] sm:text-5xl lg:text-6xl">
+            {promo.title}
+            <span class="mt-2 block text-white">{promo.titleAccent}</span>
+          </h1>
+          <p class="mt-5 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
+            {promo.subtitle}
+          </p>
+          <a href={promo.ctaHref} class="promo-cta btn-magnetic mt-8 inline-flex">
+            {promo.cta}
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div class="promo-visual relative mx-auto w-full max-w-md">
+          <div
+            class="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-[#0d6a86] via-ocean to-[#071822] p-8 shadow-[0_40px_100px_rgba(0,0,0,0.45)]"
+          >
+            <div class="absolute -right-8 -top-8 h-40 w-40 rounded-full bg-signal/30 blur-2xl"></div>
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">Deposit Match</p>
+            <p class="mt-3 font-display text-7xl font-extrabold text-signal">{promo.highlight.percent}</p>
+            <p class="mt-2 text-lg font-semibold text-white">{promo.highlight.label}</p>
+            <p class="mt-1 text-sm text-white/65">{promo.highlight.detail}</p>
+            <div class="mt-8 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
+              {promo.example.deposit}<br />
+              {promo.example.bonus}<br />
+              <span class="font-semibold text-signal">{promo.example.result}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Countdown + period -->
+      <div
+        class="relative mx-auto mt-12 grid max-w-6xl gap-4 rounded-[1.75rem] border border-signal/25 bg-[#0a1620]/80 p-5 backdrop-blur sm:p-6 lg:grid-cols-[1.2fr_0.8fr]"
+      >
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-white/50">Offer Pulse</h3>
+          <div class="mt-4 grid grid-cols-4 gap-2 sm:gap-3" id="promo-countdown" data-end={promo.endDate}>
+            {
+              ['Days', 'Hours', 'Minutes', 'Seconds'].map((label) => (
+                <div class="rounded-xl border border-white/10 bg-[#102433] px-2 py-4 text-center sm:px-3">
+                  <p class="font-display text-2xl font-bold tabular-nums text-white sm:text-3xl" data-unit={label.toLowerCase()}>
+                    00
+                  </p>
+                  <p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/45">
+                    {label}
+                  </p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <div class="flex flex-col justify-center">
+          <h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-white/50">
+            {promo.periodLabel}
+          </h3>
+          <div
+            class="mt-4 rounded-xl bg-signal px-4 py-4 text-center font-display text-lg font-bold tracking-wide text-ink sm:text-xl"
+          >
+            {promo.periodValue}
+          </div>
+          <p class="mt-3 text-xs leading-relaxed text-white/50">{promo.highlight.note}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how-it-works" class="px-5 py-16 sm:px-8 lg:px-12 lg:py-20">
+      <div class="mx-auto max-w-6xl">
+        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-signal">How It Works</p>
+        <h2 class="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">
+          Five simple steps to claim your progressive bonus
+        </h2>
+        <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+          {
+            promo.steps.map((step) => (
+              <article class="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-signal/40 hover:bg-white/[0.07]">
+                <p class="font-display text-3xl font-bold text-signal/80">{step.step}</p>
+                <h3 class="mt-3 font-display text-lg font-bold text-white">{step.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-white/60">{step.copy}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- The Bonus -->
+    <section id="the-bonus" class="px-5 py-16 sm:px-8 lg:px-12 lg:py-20">
+      <div class="mx-auto max-w-6xl">
+        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-signal">The Bonus</p>
+        <h2 class="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">
+          Trade with an edge
+        </h2>
+        <p class="mt-4 max-w-2xl text-base text-white/65">
+          Progressive conditions on your MT5 Bonus Account — built to multiply your firepower as you
+          deposit and grow.
+        </p>
+
+        <div class="mt-8 grid gap-3 sm:grid-cols-3">
+          {
+            promo.edge.map((item) => (
+              <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+                <p class="font-display text-xl font-bold text-signal">{item.title}</p>
+                <p class="mt-1 text-sm text-white/60">{item.copy}</p>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="mt-8 grid gap-5 lg:grid-cols-3">
+          {
+            promo.tiers.map((tier) => (
+              <article class="flex h-full flex-col rounded-[1.5rem] border border-white/10 bg-gradient-to-b from-white/[0.07] to-transparent p-6">
+                <p class="font-display text-5xl font-extrabold text-[#e8c87a]">{tier.percent}</p>
+                <h3 class="mt-3 font-display text-2xl font-bold text-white">{tier.name}</h3>
+                <p class="mt-3 text-sm leading-relaxed text-white/65">{tier.copy}</p>
+                <dl class="mt-6 grid grid-cols-2 gap-3 text-sm">
+                  <div class="rounded-xl bg-white/5 p-3">
+                    <dt class="text-[10px] uppercase tracking-[0.14em] text-white/45">Min deposit</dt>
+                    <dd class="mt-1 font-semibold text-white">{tier.minDeposit}</dd>
+                  </div>
+                  <div class="rounded-xl bg-white/5 p-3">
+                    <dt class="text-[10px] uppercase tracking-[0.14em] text-white/45">Max credit</dt>
+                    <dd class="mt-1 font-semibold text-white">{tier.maxCredit}</dd>
+                  </div>
+                </dl>
+                <a href={promo.ctaHref} class="btn-primary mt-auto pt-6">
+                  {tier.cta}
+                </a>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="mt-8 rounded-2xl border border-signal/20 bg-signal/10 px-5 py-4 text-sm text-white/75">
+          MT5 Bonus Account · min deposit $25 · progressive tiers up to $5,000 max credit · Terms apply.
+        </div>
+      </div>
+    </section>
+
+    <!-- Related promos -->
+    <section class="px-5 py-10 sm:px-8 lg:px-12">
+      <div class="mx-auto grid max-w-6xl gap-4 md:grid-cols-3">
+        {
+          promo.related.map((item) => (
+            <article class="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+              <h3 class="font-display text-lg font-bold text-white">{item.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-white/60">{item.copy}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Terms -->
+    <section id="terms" class="px-5 py-16 sm:px-8 lg:px-12 lg:py-20">
+      <div class="mx-auto max-w-6xl">
+        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-signal">Legal</p>
+        <h2 class="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">
+          Terms & Conditions
+        </h2>
+        <p class="mt-4 max-w-2xl text-sm text-white/60">{promo.termsIntro}</p>
+
+        <div class="promo-accordion mt-8 space-y-3">
+          {
+            promo.terms.map((section, index) => (
+              <details class="group rounded-2xl border border-white/10 bg-white/[0.03]" open={index === 0}>
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4">
+                  <span class="flex items-center gap-3">
+                    <span class="font-display text-sm font-bold text-signal">{section.id}</span>
+                    <span class="font-semibold text-white">{section.title}</span>
+                  </span>
+                  <span class="text-signal transition group-open:rotate-45">+</span>
+                </summary>
+                <div class="border-t border-white/10 px-5 py-4">
+                  <ul class="space-y-2 text-sm leading-relaxed text-white/65">
+                    {section.items.map((item) => (
+                      <li class="flex gap-2">
+                        <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-signal" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </details>
+            ))
+          }
+        </div>
+
+        <div class="mt-10 text-center">
+          <a href={promo.ctaHref} class="promo-cta btn-magnetic inline-flex">Start Trading</a>
+          <p class="mt-4 text-xs text-white/45">
+            Full bonus documentation:
+            <a
+              class="text-signal hover:underline"
+              href="https://drive.google.com/file/d/1HuDIf6cajQAQ7K09HXrsWPmCj-Wj4myq/view"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Terms & Conditions (Bonus / Credit)
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/10 px-5 py-10 sm:px-8 lg:px-12">
+    <div class="mx-auto flex max-w-6xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p class="font-display text-lg font-bold tracking-[0.08em] text-white">{brand.name}</p>
+        <p class="mt-2 max-w-md text-sm text-white/50">
+          Trading leveraged products involves significant risk and may not be suitable for all
+          investors.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href={links.register} class="btn-primary">Open Account</a>
+        <a href="/" class="btn-secondary border-white/20 bg-transparent text-white hover:text-white"
+          >Back to Home</a
+        >
+      </div>
+    </div>
+    <p class="mx-auto mt-8 max-w-6xl text-xs text-white/35">
+      Copyright © {new Date().getFullYear()} — {brand.name}. All rights reserved.
+    </p>
+  </footer>
+</Layout>
+
+<style is:global>
+  .promo-page {
+    background:
+      radial-gradient(900px 500px at 15% -10%, rgba(20, 184, 166, 0.18), transparent 55%),
+      radial-gradient(700px 400px at 90% 10%, rgba(10, 77, 104, 0.35), transparent 50%),
+      linear-gradient(180deg, #071822 0%, #050d14 45%, #071822 100%);
+    color: white;
+    min-height: 100vh;
+  }
+
+  .promo-page .scroll-progress-bar {
+    background: linear-gradient(90deg, #0a4d68, #14b8a6, #e8c87a);
+  }
+
+  .promo-cta {
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, #e8c87a 0%, #c9a24b 55%, #a8842f 100%);
+    color: #071822;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.9rem 1.35rem;
+    transition: filter 0.25s ease, transform 0.25s ease;
+  }
+
+  .promo-cta:hover {
+    filter: brightness(1.05);
+  }
+
+  .promo-accordion summary::-webkit-details-marker {
+    display: none;
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+
+  const root = document.getElementById('promo-countdown');
+  const endAttr = root?.dataset.end;
+  const end = endAttr ? new Date(endAttr).getTime() : Date.now();
+
+  const units = {
+    days: root?.querySelector('[data-unit="days"]'),
+    hours: root?.querySelector('[data-unit="hours"]'),
+    minutes: root?.querySelector('[data-unit="minutes"]'),
+    seconds: root?.querySelector('[data-unit="seconds"]'),
+  };
+
+  const pad = (n: number) => String(Math.max(0, n)).padStart(2, '0');
+
+  const tick = () => {
+    const diff = Math.max(0, end - Date.now());
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    const seconds = Math.floor((diff % 60000) / 1000);
+    if (units.days) units.days.textContent = pad(days);
+    if (units.hours) units.hours.textContent = pad(hours);
+    if (units.minutes) units.minutes.textContent = pad(minutes);
+    if (units.seconds) units.seconds.textContent = pad(seconds);
+  };
+
+  tick();
+  window.setInterval(tick, 1000);
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    gsap.from('.promo-main > section', {
+      opacity: 0,
+      y: 28,
+      duration: 0.7,
+      stagger: 0.08,
+      ease: 'power3.out',
+    });
+  }
+
+  document.querySelectorAll('.btn-magnetic').forEach((btn) => {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    const el = btn as HTMLElement;
+    el.addEventListener('pointermove', (event) => {
+      const rect = el.getBoundingClientRect();
+      const x = event.clientX - rect.left - rect.width / 2;
+      const y = event.clientY - rect.top - rect.height / 2;
+      gsap.to(el, { x: x / 18, y: y / 18, duration: 0.3, ease: 'power2.out' });
+    });
+    el.addEventListener('pointerleave', () => {
+      gsap.to(el, { x: 0, y: 0, duration: 0.5, ease: 'power3.out' });
+    });
+  });
+</script>

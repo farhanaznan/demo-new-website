@@ -1,0 +1,38 @@
+---
+import { links, steps } from '../content/site';
+---
+
+<section id="get-started" class="section-pad pt-0">
+  <div class="container-shell">
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <div class="section-intro max-w-2xl">
+        <p class="eyebrow">Get started</p>
+        <h2 class="headline mt-3">Open an account in 4 simple steps</h2>
+      </div>
+      <a href={links.register} class="btn-primary btn-magnetic w-fit">Open Account Now</a>
+    </div>
+
+    <div class="relative mt-12">
+      <div
+        class="pointer-events-none absolute left-6 right-6 top-10 hidden h-[2px] origin-left bg-line xl:block"
+        aria-hidden="true"
+      >
+        <div class="steps-progress-line h-full origin-left scale-x-0 bg-signal"></div>
+      </div>
+
+      <ol class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        {
+          steps.map((item) => (
+            <li class="step-item relative rounded-2xl border border-line bg-white/70 p-6 transition duration-300">
+              <p class="font-display text-4xl font-bold text-signal/50 transition duration-300">
+                {item.step}
+              </p>
+              <h3 class="mt-3 font-display text-xl font-bold text-ink">{item.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{item.copy}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>

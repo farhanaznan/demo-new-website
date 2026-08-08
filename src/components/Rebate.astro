@@ -1,0 +1,48 @@
+---
+import { links } from '../content/site';
+---
+
+<section class="section-pad pt-0">
+  <div class="container-shell">
+    <div
+      class="rebate-panel relative overflow-hidden rounded-[2rem] border border-line bg-gradient-to-br from-mist via-white to-[#d9eef3] px-6 py-12 sm:px-10 lg:px-14"
+    >
+      <div
+        class="pointer-events-none absolute -right-10 top-0 h-56 w-56 rounded-full bg-signal/20 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+      <div class="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+        <div>
+          <p class="eyebrow">Infinite Self Rebate</p>
+          <h2 class="headline mt-3">Every lot you trade can earn real cashback</h2>
+          <p class="lede mt-4">
+            Accumulate 8 points per lot on your MT5 Infinite account and redeem for instant rewards.
+            Cashback rate: $8 per lot.
+          </p>
+          <a href={links.register} class="btn-primary btn-magnetic mt-8">Start Earning Now</a>
+        </div>
+        <div class="grid grid-cols-3 gap-3 sm:gap-4">
+          <div class="rounded-2xl bg-ink p-4 text-white transition duration-300 hover:-translate-y-1 sm:p-5">
+            <p class="text-[10px] uppercase tracking-[0.16em] text-white/50">Cashback</p>
+            <p class="mt-2 font-display text-2xl font-bold text-signal sm:text-3xl">$8/lot</p>
+          </div>
+          <div class="rounded-2xl border border-line bg-white/80 p-4 transition duration-300 hover:-translate-y-1 sm:p-5">
+            <p class="text-[10px] uppercase tracking-[0.16em] text-muted">Points</p>
+            <p
+              class="mt-2 font-display text-2xl font-bold text-ink tabular-nums sm:text-3xl"
+              data-count="8"
+              data-suffix=" pts"
+            >
+              0 pts
+            </p>
+          </div>
+          <div class="rounded-2xl border border-line bg-white/80 p-4 transition duration-300 hover:-translate-y-1 sm:p-5">
+            <p class="text-[10px] uppercase tracking-[0.16em] text-muted">Account</p>
+            <p class="mt-2 font-display text-lg font-bold text-ink sm:text-xl">Infinite</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

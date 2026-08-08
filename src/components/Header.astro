@@ -1,0 +1,118 @@
+---
+import { brand, links, nav } from '../content/site';
+---
+
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-50 border-b border-transparent transition-[background,border,box-shadow] duration-300"
+>
+  <div class="container-shell flex h-16 items-center justify-between gap-4 sm:h-18">
+    <a href="/" class="group flex items-center gap-2.5" aria-label={`${brand.name} home`}>
+      <span
+        class="grid h-9 w-9 place-items-center rounded-full bg-ocean text-sm font-bold text-white shadow-[0_8px_24px_rgba(10,77,104,0.35)]"
+      >
+        {brand.mark}
+      </span>
+      <span class="font-display text-lg font-extrabold tracking-[0.08em] text-ink sm:text-xl"
+        >{brand.name}</span
+      >
+    </a>
+
+    <nav class="hidden items-center gap-7 lg:flex" aria-label="Primary">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'nav-link text-sm font-medium text-ink-soft/80 transition hover:text-ocean',
+              item.href === '/promotion' && Astro.url.pathname.startsWith('/promotion')
+                ? 'is-active'
+                : '',
+            ]}
+            aria-current={
+              item.href === '/promotion' && Astro.url.pathname.startsWith('/promotion')
+                ? 'page'
+                : undefined
+            }
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-2 sm:gap-3">
+      <a href={links.login} class="btn-secondary hidden px-4 py-2.5 sm:inline-flex"
+        >Log In</a
+      >
+      <a href={links.register} class="btn-primary px-4 py-2.5">Sign Up</a>
+      <button
+        id="nav-toggle"
+        type="button"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-line bg-white/80 lg:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Open menu"
+      >
+        <span class="sr-only">Menu</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-nav" class="hidden border-t border-line bg-white/95 lg:hidden">
+    <nav class="container-shell flex flex-col gap-1 py-3" aria-label="Mobile">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'rounded-md px-3 py-2.5 text-sm font-medium text-ink hover:bg-mist',
+              item.href === '/promotion' && Astro.url.pathname.startsWith('/promotion')
+                ? 'bg-mist text-ocean'
+                : '',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a href={links.login} class="rounded-md px-3 py-2.5 text-sm font-medium text-ink hover:bg-mist"
+        >Log In</a
+      >
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+  const toggle = document.getElementById('nav-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+
+  const onScroll = () => {
+    if (!header) return;
+    const scrolled = window.scrollY > 12;
+    header.classList.toggle('border-line/80', scrolled);
+    header.classList.toggle('bg-white/85', scrolled);
+    header.classList.toggle('shadow-[0_8px_30px_rgba(7,24,34,0.06)]', scrolled);
+    header.classList.toggle('backdrop-blur-md', scrolled);
+  };
+
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  toggle?.addEventListener('click', () => {
+    const open = mobileNav?.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+
+  mobileNav?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.add('hidden');
+      toggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>

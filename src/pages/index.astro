@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import StatsBar from '../components/StatsBar.astro';
+import Features from '../components/Features.astro';
+import Performance from '../components/Performance.astro';
+import Accounts from '../components/Accounts.astro';
+import Rebate from '../components/Rebate.astro';
+import Markets from '../components/Markets.astro';
+import Steps from '../components/Steps.astro';
+import Platforms from '../components/Platforms.astro';
+import Trust from '../components/Trust.astro';
+import CustomersSEA from '../components/CustomersSEA.astro';
+import FinalCta from '../components/FinalCta.astro';
+---
+
+<Layout>
+  <Header />
+  <main>
+    <Hero />
+    <StatsBar />
+    <Features />
+    <Performance />
+    <Accounts />
+    <Rebate />
+    <Markets />
+    <CustomersSEA />
+    <Steps />
+    <Platforms />
+    <Trust />
+    <FinalCta />
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  import { initHomeAnimations } from '../scripts/animations';
+
+  const boot = () => initHomeAnimations();
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+</script>

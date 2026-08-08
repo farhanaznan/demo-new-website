@@ -1,0 +1,76 @@
+---
+import { brand, links, nav } from '../content/site';
+---
+
+<footer class="border-t border-line bg-ink text-white">
+  <div class="container-shell section-pad !py-16">
+    <div class="grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr]">
+      <div>
+        <div class="flex items-center gap-2.5">
+          <span class="grid h-9 w-9 place-items-center rounded-full bg-signal text-sm font-bold text-ink"
+            >{brand.mark}</span
+          >
+          <span class="font-display text-xl tracking-[0.08em]">{brand.name}</span>
+        </div>
+        <p class="mt-5 max-w-md text-sm leading-relaxed text-white/70">
+          Welcome to {brand.name}, where trading meets clarity. With a powerful platform and
+          disciplined market access, we help traders pursue growth with precision and control.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href={links.register} class="btn-primary bg-signal text-ink hover:bg-white"
+            >Start Trading</a
+          >
+          <a
+            href={links.login}
+            class="btn-secondary border-white/20 bg-transparent text-white hover:border-white hover:text-white"
+            >Client Portal</a
+          >
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-white/50">Explore</h3>
+        <ul class="mt-4 space-y-2.5">
+          {
+            nav.map((item) => (
+              <li>
+                <a href={item.href} class="text-sm text-white/75 transition hover:text-white">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-white/50">Legal</h3>
+        <ul class="mt-4 space-y-2.5 text-sm text-white/75">
+          <li><a href="#legal" class="hover:text-white">Terms of Business</a></li>
+          <li><a href="#legal" class="hover:text-white">Privacy Policy</a></li>
+          <li><a href="#legal" class="hover:text-white">Risk Disclosure</a></li>
+          <li><a href="#legal" class="hover:text-white">AML Policy</a></li>
+        </ul>
+        <p class="mt-6 text-sm text-white/55">
+          Support: <a href={`mailto:${links.supportEmail}`} class="text-signal hover:underline"
+            >{links.supportEmail}</a
+          >
+        </p>
+      </div>
+    </div>
+
+    <div id="legal" class="mt-14 space-y-4 border-t border-white/10 pt-8 text-xs leading-relaxed text-white/45">
+      <p>
+        <strong class="font-semibold text-white/65">Risk warning:</strong> Trading leveraged products
+        such as Forex and CFDs may not be suitable for all investors and carries a high degree of risk
+        to your capital. You should ensure you fully understand the risks involved.
+      </p>
+      <p>
+        <strong class="font-semibold text-white/65">General disclaimer:</strong> Market information on
+        this website is provided for general purposes only and does not constitute investment advice.
+        Past performance is not indicative of future results.
+      </p>
+      <p>Copyright © {new Date().getFullYear()} — {brand.name}. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

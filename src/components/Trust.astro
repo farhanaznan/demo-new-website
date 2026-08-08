@@ -1,0 +1,47 @@
+---
+import { brand, links, whyUs } from '../content/site';
+---
+
+<section id="banking" class="section-pad pt-0">
+  <div class="container-shell">
+    <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+      <div class="section-intro">
+        <p class="eyebrow">Why {brand.name}</p>
+        <h2 class="headline mt-3">Your funds. Always protected.</h2>
+        <p class="lede mt-4">
+          Trade with confidence through segregated client accounts, reliable payment rails, and a
+          support team built for traders who move fast.
+        </p>
+        <ul class="mt-8 space-y-3 text-sm text-ink-soft">
+          <li class="flex gap-2">
+            <span class="mt-1 h-1.5 w-1.5 rounded-full bg-signal"></span>
+            Quick deposits with local providers
+          </li>
+          <li class="flex gap-2">
+            <span class="mt-1 h-1.5 w-1.5 rounded-full bg-signal"></span>
+            High-speed withdrawals
+          </li>
+          <li class="flex gap-2">
+            <span class="mt-1 h-1.5 w-1.5 rounded-full bg-signal"></span>
+            Global market access with transparent costs
+          </li>
+        </ul>
+        <a href={links.register} class="btn-primary btn-magnetic mt-8">Create Free Account</a>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        {
+          whyUs.map((item) => (
+            <article
+              data-spotlight
+              class="why-card spotlight-card rounded-2xl border border-line bg-white/75 p-5 transition duration-300 hover:-translate-y-1 hover:border-signal/35 hover:shadow-[0_16px_36px_rgba(7,24,34,0.08)]"
+            >
+              <h3 class="font-display text-lg font-bold text-ink">{item.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{item.copy}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

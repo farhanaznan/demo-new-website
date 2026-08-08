@@ -1,0 +1,139 @@
+---
+import { brand, links } from '../content/site';
+---
+
+<section class="hero-stage relative min-h-[100svh] overflow-hidden pt-16">
+  <div class="absolute inset-0 -z-10">
+    <div
+      class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(20,184,166,0.18),_transparent_55%),linear-gradient(160deg,#dceef5_0%,#f5fafc_42%,#cfe3ec_100%)]"
+    >
+    </div>
+    <div
+      class="hero-orb absolute -left-24 top-24 h-72 w-72 rounded-full bg-signal/25 blur-3xl"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="hero-orb absolute -right-16 bottom-10 h-80 w-80 rounded-full bg-ocean/20 blur-3xl"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="hero-grid pointer-events-none absolute inset-0 opacity-[0.22]" aria-hidden="true"></div>
+    <svg
+      class="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] w-full opacity-40"
+      viewBox="0 0 1440 520"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M0 360C180 300 260 220 420 240C580 260 640 360 820 340C1000 320 1120 180 1280 200C1360 210 1400 250 1440 280V520H0V360Z"
+        fill="url(#heroFill)"></path>
+      <path
+        class="hero-wave"
+        d="M0 300C200 250 320 180 480 200C700 230 760 340 980 310C1160 285 1260 180 1440 210"
+        stroke="#0A4D68"
+        stroke-opacity="0.35"
+        stroke-width="2"></path>
+      <defs>
+        <linearGradient id="heroFill" x1="720" y1="160" x2="720" y2="520" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#0A4D68" stop-opacity="0.18"></stop>
+          <stop offset="1" stop-color="#0A4D68" stop-opacity="0"></stop>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="container-shell relative flex min-h-[calc(100svh-4rem)] flex-col justify-center py-16 lg:py-20">
+    <div class="max-w-3xl">
+      <p
+        class="hero-brand overflow-hidden font-display text-5xl font-extrabold tracking-[0.14em] text-ink [perspective:600px] sm:text-6xl lg:text-7xl"
+      >
+        {brand.name}
+      </p>
+      <h1 class="hero-title mt-5 font-display text-3xl font-bold leading-[1.08] tracking-tight text-ink sm:text-5xl lg:text-6xl">
+        Trade Better.<br />Build a Brighter Future.
+      </h1>
+      <p class="hero-copy mt-5 max-w-xl text-base leading-relaxed text-ink-soft/80 sm:text-lg">
+        {brand.description}
+      </p>
+      <div class="hero-cta mt-8 flex flex-wrap gap-3">
+        <a href={links.register} class="btn-primary btn-magnetic">Start Trading</a>
+        <a href={links.login} class="btn-secondary btn-magnetic">Log In</a>
+      </div>
+    </div>
+
+    <div
+      class="hero-visual absolute right-0 top-1/2 hidden w-[42%] -translate-y-1/2 perspective-[1200px] lg:block"
+      aria-hidden="true"
+    >
+      <div class="hero-visual-inner relative aspect-square max-w-md transform-gpu xl:max-w-lg">
+        <div
+          class="absolute inset-[8%] rounded-[2rem] border border-white/60 bg-white/40 shadow-[0_30px_80px_rgba(7,24,34,0.12)] backdrop-blur-md"
+        >
+        </div>
+        <div
+          class="absolute inset-[18%] rounded-[1.5rem] bg-gradient-to-br from-ocean via-[#0d6a86] to-signal opacity-90"
+        >
+        </div>
+        <div class="absolute inset-[26%] rounded-2xl border border-white/25 bg-ink/20 p-5 text-white">
+          <div class="flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-white/70">
+            <span class="inline-flex items-center gap-2">
+              <span class="live-dot h-1.5 w-1.5 rounded-full bg-signal"></span>
+              Live Markets
+            </span>
+            <span class="text-signal">{brand.name}</span>
+          </div>
+          <div class="mt-6 space-y-3">
+            <div class="h-2 w-full overflow-hidden rounded-full bg-white/15">
+              <div class="meter-bar h-2 w-4/5 rounded-full bg-signal"></div>
+            </div>
+            <div class="h-2 w-full overflow-hidden rounded-full bg-white/15">
+              <div class="meter-bar h-2 w-3/5 rounded-full bg-white/70"></div>
+            </div>
+            <div class="h-2 w-full overflow-hidden rounded-full bg-white/15">
+              <div class="meter-bar h-2 w-2/3 rounded-full bg-signal/70"></div>
+            </div>
+          </div>
+          <div class="mt-8 grid grid-cols-2 gap-3 text-xs">
+            <div class="rounded-lg bg-white/10 p-3">
+              <p class="text-white/55">EURUSD</p>
+              <p
+                class="ticker mt-1 font-semibold tabular-nums"
+                data-ticker
+                data-base="1.0842"
+                data-decimals="4"
+                data-variance="0.0012"
+              >
+                1.0842
+              </p>
+            </div>
+            <div class="rounded-lg bg-white/10 p-3">
+              <p class="text-white/55">XAUUSD</p>
+              <p
+                class="ticker mt-1 font-semibold tabular-nums"
+                data-ticker
+                data-base="2341.60"
+                data-decimals="2"
+                data-variance="1.8"
+              >
+                2341.60
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="float-chip absolute -left-4 top-16 rounded-xl border border-white/70 bg-white/90 px-4 py-3 shadow-lg"
+        >
+          <p class="text-[10px] uppercase tracking-[0.18em] text-muted">Spread</p>
+          <p class="font-display text-xl font-bold text-ocean">0.0</p>
+        </div>
+        <div
+          class="float-chip absolute -right-2 bottom-20 rounded-xl border border-white/70 bg-white/90 px-4 py-3 shadow-lg"
+        >
+          <p class="text-[10px] uppercase tracking-[0.18em] text-muted">Leverage</p>
+          <p class="font-display text-xl font-bold text-ocean">1:3000</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

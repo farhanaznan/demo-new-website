@@ -1,0 +1,173 @@
+---
+import { seaCustomers } from '../content/site';
+
+const rowA = [...seaCustomers];
+const rowB = [...seaCustomers].reverse();
+---
+
+<section id="customers" class="sea-customers section-pad overflow-hidden pt-0">
+  <div class="container-shell">
+    <div class="section-intro mx-auto max-w-2xl text-center">
+      <p class="eyebrow">Our community</p>
+      <h2 class="headline mt-3">Trusted by traders across Southeast Asia</h2>
+      <p class="lede mx-auto mt-4">
+        Across Indonesia, Thailand, Vietnam, the Philippines, and the rest of ASEAN — demo-new powers
+        traders with local payment rails and 24/7 support.
+      </p>
+    </div>
+
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <div class="inline-flex items-center gap-2 rounded-full border border-line bg-white/80 px-4 py-2 text-sm text-ink-soft">
+        <span class="live-dot h-2 w-2 rounded-full bg-signal"></span>
+        <span
+          ><strong class="text-ink" data-count="10" data-suffix=" markets">0 markets</strong> across
+          ASEAN</span
+        >
+      </div>
+      <div class="inline-flex items-center gap-2 rounded-full border border-line bg-white/80 px-4 py-2 text-sm text-ink-soft">
+        <strong class="text-ink" data-count="36" data-suffix="K+ traders">0K+ traders</strong>
+        <span>growing every week</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Infinite marquee rows -->
+  <div class="sea-marquee-wrap relative mt-12 space-y-4" aria-hidden="true">
+    <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-paper to-transparent sm:w-28">
+    </div>
+    <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-paper to-transparent sm:w-28">
+    </div>
+
+    <div class="sea-marquee sea-marquee--left overflow-hidden">
+      <div class="sea-marquee-track flex w-max gap-4">
+        {
+          [...rowA, ...rowA].map((country) => (
+            <div class="sea-chip flex items-center gap-3 rounded-2xl border border-line bg-white/85 px-4 py-3 shadow-[0_10px_30px_rgba(7,24,34,0.06)]">
+              <img
+                src={`/images/flags/${country.code}.svg`}
+                alt=""
+                width="40"
+                height="28"
+                class="h-7 w-10 rounded-md object-cover shadow-sm ring-1 ring-black/5"
+                loading="lazy"
+              />
+              <div>
+                <p class="text-sm font-semibold text-ink">{country.name}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="sea-marquee sea-marquee--right overflow-hidden">
+      <div class="sea-marquee-track flex w-max gap-4">
+        {
+          [...rowB, ...rowB].map((country) => (
+            <div class="sea-chip flex items-center gap-3 rounded-2xl border border-line bg-white/85 px-4 py-3 shadow-[0_10px_30px_rgba(7,24,34,0.06)]">
+              <img
+                src={`/images/flags/${country.code}.svg`}
+                alt=""
+                width="40"
+                height="28"
+                class="h-7 w-10 rounded-md object-cover shadow-sm ring-1 ring-black/5"
+                loading="lazy"
+              />
+              <div>
+                <p class="text-sm font-semibold text-ink">{country.name}</p>
+                <p class="text-xs text-muted">{country.traders.toLocaleString()}+ traders</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive country grid -->
+  <div class="container-shell mt-14">
+    <ul class="sea-grid grid gap-3 sm:grid-cols-2 lg:grid-cols-5" role="list">
+      {
+        seaCustomers.map((country, index) => (
+          <li>
+            <button
+              type="button"
+              class="sea-card group relative w-full overflow-hidden rounded-2xl border border-line bg-white/75 p-4 text-left transition duration-300"
+              data-sea-card
+              data-index={index}
+              aria-pressed={index === 0 ? 'true' : 'false'}
+            >
+              <div class="flex items-center gap-3">
+                <span class="relative">
+                  <img
+                    src={`/images/flags/${country.code}.svg`}
+                    alt={`${country.name} flag`}
+                    width="48"
+                    height="32"
+                    class="h-8 w-12 rounded-md object-cover shadow-sm ring-1 ring-black/5 transition duration-300 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <span class="sea-pulse absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-signal ring-2 ring-white">
+                  </span>
+                </span>
+                <span class="block font-display text-base font-bold text-ink">{country.name}</span>
+              </div>
+              <div class="mt-4 flex items-end justify-between gap-2">
+                <p class="font-display text-2xl font-bold tabular-nums text-ocean">
+                  <span data-sea-count={country.traders}>0</span>
+                  <span class="text-base">+</span>
+                </p>
+                <p class="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">
+                  Active traders
+                </p>
+              </div>
+              <div class="sea-card-bar mt-3 h-1 overflow-hidden rounded-full bg-mist">
+                <span
+                  class="sea-card-fill block h-full origin-left scale-x-0 rounded-full bg-signal"
+                  style={`--fill:${Math.min(100, Math.round((country.traders / 8200) * 100))}%`}
+                >
+                </span>
+              </div>
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="sea-active-label mt-6 text-center text-sm text-muted">
+      Now featuring traders from
+      <strong class="text-ink" data-sea-active-name>Indonesia</strong>
+    </p>
+  </div>
+</section>
+
+<style>
+  .sea-marquee-track {
+    will-change: transform;
+  }
+
+  .sea-card.is-active {
+    border-color: color-mix(in oklab, var(--color-signal) 55%, white);
+    box-shadow: 0 18px 40px rgba(7, 24, 34, 0.1);
+    transform: translateY(-4px);
+  }
+
+  .sea-card-fill {
+    width: var(--fill, 70%);
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+
+  .sea-card.is-active .sea-card-fill {
+    /* GSAP drives scaleX; keep width from --fill */
+  }
+
+  .sea-pulse {
+    animation: pulse-dot 1.6s ease-in-out infinite;
+  }
+
+  .sea-card:not(.is-active) .sea-pulse {
+    opacity: 0.35;
+    animation: none;
+  }
+</style>

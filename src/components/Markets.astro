@@ -1,0 +1,254 @@
+---
+import { links, markets } from '../content/site';
+
+const icons: Record<string, string> = {
+  forex: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>`,
+  indices: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V5M4 19h16"/><path d="m7 14 4-4 3 3 5-6"/></svg>`,
+  metals: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 4 8v8l8 5 8-5V8l-8-5Z"/><path d="M12 12 4 8m8 4 8-4M12 12v9"/></svg>`,
+  energies: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 21h8M9 21V9a3 3 0 0 1 6 0v12"/><path d="M9 11h6M9 15h6"/><path d="M12 3v3"/></svg>`,
+  crypto: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M10 8h5.5a2.5 2.5 0 0 1 0 5H10zm0 5h6a2.5 2.5 0 0 1 0 5H10zM11 7v10M14 7v10"/></svg>`,
+  shares: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 16V10M12 16V8M16 16v-4"/></svg>`,
+};
+---
+
+<section id="markets" class="markets-orbit relative overflow-hidden">
+  <div class="absolute inset-0 bg-[#050b12]"></div>
+  <div
+    class="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-[42%] rounded-full bg-[radial-gradient(circle,rgba(20,184,166,0.22)_0%,transparent_65%)]"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#071822]/80 to-transparent"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-4xl px-5 py-20 text-center sm:px-8 lg:py-28">
+    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-signal">Markets</p>
+    <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+      Trade all markets.<br />Boundless opportunity.
+    </h2>
+    <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
+      Trade Forex, metals, indices, shares, energies, crypto and more in one powerful ecosystem —
+      with institutional-grade conditions and lightning-fast execution.
+    </p>
+    <a href={links.register} class="btn-primary btn-magnetic mt-8 bg-signal text-ink hover:bg-white">
+      Start Trading Now
+    </a>
+
+    <div class="market-orbit-stage relative mx-auto mt-14 max-w-3xl">
+      <div
+        class="pointer-events-none absolute left-1/2 top-[42%] h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full border border-signal/25 sm:h-72 sm:w-72"
+        aria-hidden="true"
+      >
+      </div>
+      <div
+        class="pointer-events-none absolute left-1/2 top-[42%] h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-signal/10 blur-2xl sm:h-52 sm:w-52"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div
+        class="market-orbit-row relative z-10 flex items-end justify-center gap-2 sm:gap-4 md:gap-5"
+        role="tablist"
+        aria-label="Market categories"
+      >
+        {
+          markets.map((market, index) => (
+            <button
+              type="button"
+              role="tab"
+              class="market-orbit-btn group relative flex flex-col items-center"
+              data-market-tab={index}
+              aria-label={market.title}
+              aria-selected={index === 2 ? 'true' : 'false'}
+              aria-controls="market-orbit-panel"
+              id={`market-tab-${index}`}
+            >
+              <span
+                class="market-orbit-icon grid place-items-center rounded-full border border-white/15 bg-[#0b1620] text-white/80 shadow-[0_0_0_0_rgba(20,184,166,0)] transition duration-300"
+                set:html={icons[market.id]}
+              />
+            </button>
+          ))
+        }
+      </div>
+
+      <div
+        id="market-orbit-panel"
+        role="tabpanel"
+        aria-labelledby="market-tab-2"
+        class="relative z-10 mt-8 flex flex-col items-center"
+      >
+        <p
+          class="market-orbit-label inline-flex rounded-full border border-white/15 bg-white/10 px-5 py-2 font-display text-sm font-bold tracking-wide text-white backdrop-blur"
+          data-market-label
+        >
+          {markets[2].title}
+        </p>
+        <p class="market-orbit-sub mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-signal" data-market-sub>
+          {markets[2].subtitle}
+        </p>
+        <p class="market-orbit-copy mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/60" data-market-copy>
+          {markets[2].detail}
+        </p>
+        <ul class="mt-4 flex flex-wrap justify-center gap-2" data-market-points>
+          {
+            markets[2].points.map((point) => (
+              <li class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
+                {point}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .market-orbit-icon {
+    width: 3.1rem;
+    height: 3.1rem;
+  }
+
+  .market-orbit-icon :global(svg) {
+    width: 1.35rem;
+    height: 1.35rem;
+  }
+
+  .market-orbit-btn.is-active .market-orbit-icon {
+    width: 4.6rem;
+    height: 4.6rem;
+    color: white;
+    border-color: rgba(20, 184, 166, 0.65);
+    background: linear-gradient(160deg, #0f766e, #0a4d68 55%, #071822);
+    box-shadow:
+      0 0 0 10px rgba(20, 184, 166, 0.12),
+      0 0 40px rgba(20, 184, 166, 0.35);
+  }
+
+  .market-orbit-btn.is-active .market-orbit-icon :global(svg) {
+    width: 1.85rem;
+    height: 1.85rem;
+  }
+
+  .market-orbit-btn:not(.is-active) {
+    opacity: 0.55;
+  }
+
+  .market-orbit-btn:not(.is-active):hover {
+    opacity: 0.9;
+  }
+
+  @media (min-width: 640px) {
+    .market-orbit-icon {
+      width: 3.75rem;
+      height: 3.75rem;
+    }
+
+    .market-orbit-btn.is-active .market-orbit-icon {
+      width: 5.5rem;
+      height: 5.5rem;
+    }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { markets } from '../content/site';
+
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-market-tab]'));
+  const label = document.querySelector<HTMLElement>('[data-market-label]');
+  const sub = document.querySelector<HTMLElement>('[data-market-sub]');
+  const copy = document.querySelector<HTMLElement>('[data-market-copy]');
+  const points = document.querySelector<HTMLElement>('[data-market-points]');
+  const panel = document.getElementById('market-orbit-panel');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let active = 2;
+  let timer: number | undefined;
+
+  const renderPoints = (items: readonly string[]) => {
+    if (!points) return;
+    points.innerHTML = items
+      .map(
+        (point) =>
+          `<li class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">${point}</li>`,
+      )
+      .join('');
+  };
+
+  const setActive = (index: number, animate = true) => {
+    active = (index + markets.length) % markets.length;
+    const market = markets[active];
+
+    tabs.forEach((tab, i) => {
+      const on = i === active;
+      tab.classList.toggle('is-active', on);
+      tab.setAttribute('aria-selected', String(on));
+    });
+
+    if (panel) panel.setAttribute('aria-labelledby', `market-tab-${active}`);
+
+    const updateText = () => {
+      if (label) label.textContent = market.title;
+      if (sub) sub.textContent = market.subtitle;
+      if (copy) copy.textContent = market.detail;
+      renderPoints(market.points);
+    };
+
+    if (!animate || reduceMotion) {
+      updateText();
+      return;
+    }
+
+    const targets = [label, sub, copy, points].filter(Boolean);
+    gsap.to(targets, {
+      opacity: 0,
+      y: 8,
+      duration: 0.18,
+      ease: 'power2.in',
+      onComplete: () => {
+        updateText();
+        gsap.fromTo(
+          targets,
+          { opacity: 0, y: -8 },
+          { opacity: 1, y: 0, duration: 0.28, ease: 'power2.out', stagger: 0.04 },
+        );
+      },
+    });
+
+    const activeBtn = tabs[active]?.querySelector('.market-orbit-icon');
+    if (activeBtn) {
+      gsap.fromTo(
+        activeBtn,
+        { scale: 0.86 },
+        { scale: 1, duration: 0.45, ease: 'back.out(1.6)' },
+      );
+    }
+  };
+
+  const start = () => {
+    window.clearInterval(timer);
+    if (reduceMotion) return;
+    timer = window.setInterval(() => setActive(active + 1), 3200);
+  };
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => {
+      setActive(index);
+      start();
+    });
+    tab.addEventListener('pointerenter', () => {
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      setActive(index);
+      window.clearInterval(timer);
+    });
+    tab.addEventListener('pointerleave', () => start());
+  });
+
+  setActive(2, false);
+  start();
+</script>

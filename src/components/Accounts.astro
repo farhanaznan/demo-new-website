@@ -1,0 +1,195 @@
+---
+import { accounts, links } from '../content/site';
+---
+
+<section id="accounts" class="section-pad pt-0">
+  <div class="container-shell">
+    <div class="section-intro max-w-2xl">
+      <p class="eyebrow">Accounts</p>
+      <h2 class="headline mt-3">Find the account that fits your trading journey</h2>
+      <p class="lede mt-4">
+        World-class conditions consolidated into clear account types — from first trade to high-volume
+        strategies.
+      </p>
+    </div>
+
+    <div class="account-panel mt-10 overflow-hidden rounded-[1.75rem] border border-line bg-white/80 shadow-[0_24px_60px_rgba(7,24,34,0.08)]">
+      <div
+        class="flex gap-2 overflow-x-auto border-b border-line bg-mist/60 p-3 scrollbar-thin"
+        role="tablist"
+        aria-label="Account types"
+        id="account-tabs"
+      >
+        {
+          accounts.map((account, index) => (
+            <button
+              type="button"
+              role="tab"
+              id={`account-tab-${index}`}
+              aria-controls={`account-panel-${index}`}
+              aria-selected={index === 0 ? 'true' : 'false'}
+              tabindex={index === 0 ? 0 : -1}
+              data-account-tab={index}
+              class:list={[
+                'account-tab shrink-0 rounded-xl px-4 py-2.5 text-sm font-semibold transition duration-300',
+                index === 0
+                  ? 'is-active bg-ocean text-white shadow-[0_10px_24px_rgba(10,77,104,0.28)]'
+                  : 'bg-white/70 text-ink-soft hover:bg-white hover:text-ocean',
+              ]}
+            >
+              {account.name.replace('MT5 ', '')}
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="relative">
+        {
+          accounts.map((account, index) => (
+            <div
+              id={`account-panel-${index}`}
+              role="tabpanel"
+              aria-labelledby={`account-tab-${index}`}
+              data-account-panel={index}
+              hidden={index !== 0}
+              class="account-card grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.1fr_0.9fr] lg:p-10"
+            >
+              <div>
+                <div class="flex flex-wrap items-center gap-3">
+                  <h3 class="font-display text-3xl font-bold text-ink sm:text-4xl">{account.name}</h3>
+                  <span class="rounded-full bg-mist px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-ocean">
+                    {account.badge}
+                  </span>
+                </div>
+                <p class="mt-4 max-w-xl text-base leading-relaxed text-muted">{account.summary}</p>
+                <div class="mt-8 flex items-end gap-3">
+                  <p class="font-display text-5xl font-bold text-ocean">{account.minDeposit}</p>
+                  <p class="pb-2 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
+                    Minimum deposit
+                  </p>
+                </div>
+                <div class="mt-8 flex flex-wrap gap-3">
+                  <a href={links.register} class="btn-primary btn-magnetic">
+                    Open Live Account
+                  </a>
+                  <button
+                    type="button"
+                    class="btn-secondary"
+                    data-next-account
+                  >
+                    Compare next
+                  </button>
+                </div>
+              </div>
+
+              <ul class="space-y-3 rounded-2xl border border-line bg-gradient-to-br from-mist/80 to-white p-5 sm:p-6">
+                {account.points.map((point) => (
+                  <li class="flex items-start gap-3 rounded-xl bg-white/70 px-4 py-3 text-sm text-ink-soft shadow-sm">
+                    <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-signal" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+                <li class="rounded-xl bg-ink px-4 py-4 text-sm text-white/80">
+                  Instant onboarding · MT5 access · Local payment support
+                </li>
+              </ul>
+            </div>
+          ))
+        }
+
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-line/50">
+          <div id="account-autoplay" class="h-full origin-left scale-x-0 bg-signal"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-account-tab]'));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>('[data-account-panel]'));
+  const progress = document.getElementById('account-autoplay');
+  const nextButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-next-account]'));
+  let active = 0;
+  let timer: number | undefined;
+  let tween: gsap.core.Tween | undefined;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const setActive = (index: number, animate = true) => {
+    active = (index + panels.length) % panels.length;
+
+    tabs.forEach((tab, i) => {
+      const on = i === active;
+      tab.classList.toggle('is-active', on);
+      tab.classList.toggle('bg-ocean', on);
+      tab.classList.toggle('text-white', on);
+      tab.classList.toggle('shadow-[0_10px_24px_rgba(10,77,104,0.28)]', on);
+      tab.classList.toggle('bg-white/70', !on);
+      tab.classList.toggle('text-ink-soft', !on);
+      tab.setAttribute('aria-selected', String(on));
+      tab.tabIndex = on ? 0 : -1;
+    });
+
+    panels.forEach((panel, i) => {
+      const on = i === active;
+      panel.hidden = !on;
+      if (on && animate && !reduceMotion) {
+        gsap.fromTo(
+          panel,
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', clearProps: 'transform' },
+        );
+      } else if (on) {
+        gsap.set(panel, { clearProps: 'all' });
+      }
+    });
+
+    restartAutoplay();
+  };
+
+  const restartAutoplay = () => {
+    window.clearInterval(timer);
+    tween?.kill();
+    if (!progress || reduceMotion) return;
+
+    gsap.set(progress, { scaleX: 0 });
+    tween = gsap.to(progress, {
+      scaleX: 1,
+      duration: 5,
+      ease: 'none',
+      onComplete: () => setActive(active + 1),
+    });
+  };
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => setActive(index));
+    tab.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        setActive(active + 1);
+        tabs[active]?.focus();
+      }
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        setActive(active - 1);
+        tabs[active]?.focus();
+      }
+    });
+  });
+
+  nextButtons.forEach((btn) => {
+    btn.addEventListener('click', () => setActive(active + 1));
+  });
+
+  const panelRoot = document.querySelector('.account-panel');
+  panelRoot?.addEventListener('pointerenter', () => {
+    tween?.pause();
+  });
+  panelRoot?.addEventListener('pointerleave', () => {
+    tween?.resume();
+  });
+
+  setActive(0, false);
+</script>

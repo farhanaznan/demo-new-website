@@ -1,0 +1,47 @@
+---
+import { stats } from '../content/site';
+
+type CountMeta = {
+  count: number;
+  prefix?: string;
+  suffix?: string;
+  decimals?: number;
+  startText: string;
+};
+
+const countMeta: Record<string, CountMeta> = {
+  '0.0': { count: 0, decimals: 1, startText: '0.0' },
+  '1:3000': { count: 3000, prefix: '1:', startText: '1:0' },
+  '0.01': { count: 0.01, decimals: 2, startText: '0.00' },
+  '60+': { count: 60, suffix: '+', startText: '0+' },
+  '24/7': { count: 24, suffix: '/7', startText: '0/7' },
+};
+---
+
+<section class="relative z-10 -mt-6 px-5 sm:px-8 lg:px-12" aria-label="Key trading conditions">
+  <div class="container-shell surface stats-panel rounded-2xl px-4 py-5 shadow-[0_20px_50px_rgba(7,24,34,0.08)] sm:px-6">
+    <ul class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 lg:gap-2">
+      {
+        stats.map((item) => {
+          const meta = countMeta[item.value];
+          return (
+            <li class="stat-item group px-2 py-2 text-center transition duration-300 hover:-translate-y-0.5 sm:text-left">
+              <p
+                class="font-display text-2xl font-bold tracking-tight text-ink tabular-nums sm:text-3xl"
+                data-count={meta.count}
+                data-prefix={meta.prefix || ''}
+                data-suffix={meta.suffix || ''}
+                data-decimals={meta.decimals ?? 0}
+              >
+                {meta.startText}
+              </p>
+              <p class="mt-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted transition group-hover:text-ocean">
+                {item.label}
+              </p>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>
