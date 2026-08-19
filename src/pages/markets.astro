@@ -1,0 +1,475 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Logo from '../components/Logo.astro';
+import BrandWatermark from '../components/BrandWatermark.astro';
+import FinalCta from '../components/FinalCta.astro';
+import { brand, links } from '../content/site';
+import { marketsPage as page } from '../content/markets-page';
+
+const icons: Record<string, string> = {
+  forex: `<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>`,
+  indices: `<path d="M4 19V5M4 19h16"/><path d="m7 14 4-4 3 3 5-6"/>`,
+  metals: `<path d="M12 3 4 8v8l8 5 8-5V8l-8-5Z"/><path d="M12 12 4 8m8 4 8-4M12 12v9"/>`,
+  energies: `<path d="M8 21h8M9 21V9a3 3 0 0 1 6 0v12"/><path d="M9 11h6M9 15h6"/><path d="M12 3v3"/>`,
+  crypto: `<circle cx="12" cy="12" r="9"/><path d="M10 8h5.5a2.5 2.5 0 0 1 0 5H10zm0 5h6a2.5 2.5 0 0 1 0 5H10zM11 7v10M14 7v10"/>`,
+  shares: `<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 16V10M12 16V8M16 16v-4"/>`,
+};
+
+const codes: Record<string, string> = {
+  forex: 'FX',
+  indices: 'IDX',
+  metals: 'XAU',
+  energies: 'NRG',
+  crypto: 'CRY',
+  shares: 'EQT',
+};
+---
+
+<Layout title={`${page.meta.title} | ${brand.name}`} description={page.meta.description}>
+  <Header />
+
+  <main class="markets-page">
+    <!-- Hero -->
+    <section
+      class="markets-hero relative overflow-hidden pt-[calc(4rem+env(safe-area-inset-top))] sm:pt-[calc(4.5rem+env(safe-area-inset-top))]"
+    >
+      <div class="absolute inset-0 -z-10" aria-hidden="true">
+        <div class="absolute inset-0 bg-[linear-gradient(165deg,#06172D_0%,#08111F_48%,#0B2545_100%)]"></div>
+        <div class="hatch-overlay-dark absolute inset-0 opacity-80"></div>
+        <div
+          class="absolute inset-0 opacity-[0.22] [background-image:linear-gradient(rgba(22,139,255,0.35)_1px,transparent_1px),linear-gradient(90deg,rgba(22,139,255,0.35)_1px,transparent_1px)] [background-size:40px_40px] [mask-image:radial-gradient(ellipse_at_30%_20%,black_20%,transparent_72%)]"
+        >
+        </div>
+        <div
+          class="absolute left-1/2 top-[38%] h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(22,139,255,0.28)_0%,transparent_65%)] sm:h-[40rem] sm:w-[40rem]"
+        >
+        </div>
+        <BrandWatermark class="-right-[12%] top-16 opacity-[0.1] sm:right-0" />
+        <div
+          class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal/70 to-transparent"
+        >
+        </div>
+      </div>
+
+      <div class="container-shell relative grid gap-10 py-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-14 lg:py-20">
+        <div class="markets-hero-copy max-w-3xl">
+          <p class="tech-kicker">
+            <span class="live-dot h-1.5 w-1.5 rounded-full bg-signal"></span>
+            {page.hero.eyebrow}
+          </p>
+          <div class="mt-5 w-[min(100%,13rem)] sm:w-[min(100%,16rem)]">
+            <Logo tone="on-dark" class="h-auto w-full" />
+          </div>
+          <h1
+            class="mt-5 font-display text-[1.85rem] font-bold leading-[1.08] tracking-tight text-white sm:mt-6 sm:text-5xl lg:text-6xl"
+          >
+            {page.hero.headline}
+          </h1>
+          <p class="mt-4 max-w-xl text-sm leading-relaxed text-white/65 sm:mt-5 sm:text-lg">
+            {page.hero.lede}
+          </p>
+          <div class="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
+            <a href={links.register} class="btn-primary btn-magnetic">{page.hero.primaryCta}</a>
+            <a
+              href="#explore"
+              class="btn-secondary btn-magnetic border-white/25 bg-transparent text-white hover:border-white hover:text-white"
+            >
+              {page.hero.secondaryCta}
+            </a>
+          </div>
+        </div>
+
+        <div class="markets-hero-panel mech-panel-dark mech-corners relative overflow-hidden p-5 sm:p-6">
+          <div class="scanlines-dark pointer-events-none absolute inset-0 opacity-60" aria-hidden="true"></div>
+          <div class="relative">
+            <div class="flex items-center justify-between gap-3 border-b border-white/10 pb-4">
+              <p class="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55">Market matrix</p>
+              <span class="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-signal">
+                <span class="live-dot h-1.5 w-1.5 rounded-full bg-signal"></span>
+                Live feed
+              </span>
+            </div>
+            <ul class="mt-4 space-y-2.5">
+              {
+                page.categories.map((market, i) => (
+                  <li>
+                    <a
+                      href={`#${market.id}`}
+                      class="group flex items-center justify-between gap-3 border border-white/10 bg-white/[0.03] px-3 py-2.5 transition hover:border-signal/50 hover:bg-signal/10"
+                    >
+                      <span class="flex items-center gap-3">
+                        <span class="font-mono text-[10px] text-signal/80">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <span class="text-sm font-semibold text-white">{market.title}</span>
+                      </span>
+                      <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-white/40 transition group-hover:text-signal">
+                        {codes[market.id]}
+                      </span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Highlights -->
+    <section class="border-y border-white/10 bg-[#06172D]">
+      <div class="container-shell grid grid-cols-2 gap-px bg-white/10 sm:grid-cols-4">
+        {
+          page.highlights.map((item) => (
+            <div class="markets-stat bg-[#06172D] px-4 py-7 sm:px-6 sm:py-9">
+              <p class="font-display text-3xl font-bold text-signal sm:text-4xl">{item.value}</p>
+              <p class="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">
+                {item.label}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Sticky asset rail -->
+    <div
+      id="market-rail"
+      class="sticky top-[calc(4rem+env(safe-area-inset-top))] z-40 border-b border-line/80 bg-[#e8edf3]/92 backdrop-blur-md sm:top-[calc(4.5rem+env(safe-area-inset-top))]"
+    >
+      <div class="container-shell">
+        <div
+          class="flex gap-2 overflow-x-auto py-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          role="navigation"
+          aria-label="Market categories"
+        >
+          {
+            page.categories.map((market) => (
+              <a
+                href={`#${market.id}`}
+                data-market-rail={market.id}
+                class="market-rail-link shrink-0 border border-line bg-white/70 px-3.5 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-soft/80 transition hover:border-signal hover:text-ocean"
+              >
+                {market.title}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Overview -->
+    <section id="explore" class="section-pad scroll-mt-36">
+      <div class="container-shell">
+        <div class="section-intro max-w-2xl">
+          <p class="tech-kicker">{page.overview.eyebrow}</p>
+          <h2 class="headline mt-3">{page.overview.title}</h2>
+          <p class="lede mt-4">{page.overview.lede}</p>
+        </div>
+
+        <div class="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+          {
+            page.categories.map((market, index) => (
+              <a
+                href={`#${market.id}`}
+                class="market-jump mech-panel mech-corners group relative overflow-hidden p-5 transition duration-300 hover:-translate-y-1 sm:p-6"
+              >
+                <div class="flex items-start justify-between gap-3">
+                  <span class="grid h-11 w-11 place-items-center border border-line bg-mist text-ocean transition group-hover:border-signal group-hover:bg-signal group-hover:text-white">
+                    <svg
+                      class="h-5 w-5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                      aria-hidden="true"
+                    >
+                      <Fragment set:html={icons[market.id]} />
+                    </svg>
+                  </span>
+                  <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-steel">
+                    CH-{String(index + 1).padStart(2, '0')}
+                  </span>
+                </div>
+                <h3 class="mt-5 font-display text-xl font-bold text-ink">{market.title}</h3>
+                <p class="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-signal">
+                  {market.subtitle}
+                </p>
+                <p class="mt-3 text-sm leading-relaxed text-muted">{market.summary}</p>
+                <p
+                  class="mt-5 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-ocean transition group-hover:text-signal"
+                >
+                  Open channel
+                  <span aria-hidden="true">→</span>
+                </p>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed markets -->
+    {
+      page.categories.map((market, index) => {
+        const dark = index % 2 === 0;
+        return (
+          <section
+            id={market.id}
+            data-market-section={market.id}
+            class:list={[
+              'market-detail section-pad scroll-mt-36 relative overflow-hidden',
+              dark ? 'bg-[#06172D] text-white' : '',
+            ]}
+          >
+            {dark && (
+              <>
+                <div class="hatch-overlay-dark pointer-events-none absolute inset-0 opacity-50" aria-hidden="true" />
+                <BrandWatermark class="-left-[18%] bottom-0 opacity-[0.07]" />
+              </>
+            )}
+            <div class="container-shell relative">
+              <div class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-14">
+                <div>
+                  <p class="tech-kicker">
+                    <span class={dark ? 'text-signal' : ''}>{codes[market.id]} · channel</span>
+                  </p>
+                  <h2
+                    class:list={[
+                      'mt-3 font-display text-[1.75rem] font-bold tracking-tight sm:text-4xl lg:text-5xl',
+                      dark ? 'text-white' : 'text-ink',
+                    ]}
+                  >
+                    {market.title}
+                  </h2>
+                  <p
+                    class:list={[
+                      'mt-2 font-mono text-[10px] uppercase tracking-[0.2em]',
+                      dark ? 'text-signal' : 'text-ocean',
+                    ]}
+                  >
+                    {market.subtitle}
+                  </p>
+                  <p
+                    class:list={[
+                      'mt-5 text-sm leading-relaxed sm:text-lg',
+                      dark ? 'text-white/65' : 'text-muted',
+                    ]}
+                  >
+                    {market.summary}
+                  </p>
+                  {
+                    market.body.map((paragraph) => (
+                      <p
+                        class:list={[
+                          'mt-4 text-sm leading-relaxed sm:text-[0.95rem]',
+                          dark ? 'text-white/55' : 'text-ink-soft/80',
+                        ]}
+                      >
+                        {paragraph}
+                      </p>
+                    ))
+                  }
+                  <a href={links.register} class="btn-primary btn-magnetic mt-8">
+                    Trade {market.title}
+                  </a>
+                </div>
+
+                <aside
+                  class:list={[
+                    'mech-corners relative overflow-hidden p-5 sm:p-7',
+                    dark ? 'mech-panel-dark' : 'mech-panel',
+                  ]}
+                >
+                  {dark && (
+                    <div class="scanlines-dark pointer-events-none absolute inset-0 opacity-50" aria-hidden="true" />
+                  )}
+                  <div class="relative">
+                    <div
+                      class:list={[
+                        'flex items-center justify-between gap-3 border-b pb-4',
+                        dark ? 'border-white/10' : 'border-line',
+                      ]}
+                    >                      <h3
+                        class:list={[
+                          'font-mono text-[10px] uppercase tracking-[0.2em]',
+                          dark ? 'text-white/55' : 'text-muted',
+                        ]}
+                      >
+                        Key instruments
+                      </h3>
+                      <span class="font-mono text-[10px] text-signal">{codes[market.id]}</span>
+                    </div>
+                    <ul class="mt-4 grid grid-cols-2 gap-2">
+                      {
+                        market.instruments.map((item) => (
+                          <li
+                            class:list={[
+                              'border px-3 py-2.5 font-mono text-[11px] uppercase tracking-[0.08em]',
+                              dark
+                                ? 'border-white/10 bg-white/[0.04] text-white/75'
+                                : 'border-line bg-white/70 text-ink-soft',
+                            ]}
+                          >
+                            {item}
+                          </li>
+                        ))
+                      }
+                    </ul>
+
+                    <h3
+                      class:list={[
+                        'mt-8 font-mono text-[10px] uppercase tracking-[0.2em]',
+                        dark ? 'text-white/55' : 'text-muted',
+                      ]}
+                    >
+                      Why trade {market.title.toLowerCase()}
+                    </h3>
+                    <ul class="mt-4 space-y-3">
+                      {
+                        market.points.map((point, i) => (
+                          <li class="flex gap-3 text-sm leading-relaxed">
+                            <span class="font-mono text-[10px] text-signal">
+                              {String(i + 1).padStart(2, '0')}
+                            </span>
+                            <span class={dark ? 'text-white/65' : 'text-muted'}>{point}</span>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                </aside>
+              </div>
+            </div>
+          </section>
+        );
+      })
+    }
+
+    <!-- Why -->
+    <section class="section-pad">
+      <div class="container-shell">
+        <div class="section-intro max-w-2xl">
+          <p class="tech-kicker">{page.why.eyebrow}</p>
+          <h2 class="headline mt-3">{page.why.title}</h2>
+          <p class="lede mt-4">{page.why.lede}</p>
+        </div>
+        <div class="mt-10 grid gap-4 md:grid-cols-3 md:gap-5">
+          {
+            page.why.items.map((item, i) => (
+              <div class="mech-panel mech-corners p-5 sm:p-6">
+                <p class="font-mono text-[10px] uppercase tracking-[0.22em] text-signal">
+                  SYS-{String(i + 1).padStart(2, '0')}
+                </p>
+                <h3 class="mt-3 font-display text-xl font-bold text-ink">{item.title}</h3>
+                <p class="mt-3 text-sm leading-relaxed text-muted">{item.copy}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <FinalCta
+      title={page.cta.title}
+      lede={page.cta.lede}
+      primaryLabel={page.cta.primary}
+      secondaryLabel={page.cta.secondary}
+    />
+    <div class="container-shell -mt-6 mb-12 sm:-mt-10 sm:mb-16">
+      <p class="mx-auto max-w-3xl text-center text-xs leading-relaxed text-muted">{page.risk}</p>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .market-rail-link.is-active {
+    border-color: color-mix(in oklab, var(--color-signal) 70%, white);
+    background: color-mix(in oklab, var(--color-signal) 12%, white);
+    color: var(--color-ocean);
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const heroCopy = document.querySelector('.markets-hero-copy');
+  const heroPanel = document.querySelector('.markets-hero-panel');
+  if (heroCopy && !reduceMotion) {
+    gsap.from(heroCopy.children, {
+      opacity: 0,
+      y: 24,
+      duration: 0.7,
+      stagger: 0.08,
+      ease: 'power3.out',
+    });
+  }
+  if (heroPanel && !reduceMotion) {
+    gsap.from(heroPanel, {
+      opacity: 0,
+      x: 28,
+      duration: 0.8,
+      delay: 0.15,
+      ease: 'power3.out',
+    });
+  }
+
+  gsap.utils.toArray<HTMLElement>('.market-jump').forEach((card, i) => {
+    if (reduceMotion) return;
+    gsap.from(card, {
+      scrollTrigger: { trigger: card, start: 'top 88%' },
+      opacity: 0,
+      y: 28,
+      duration: 0.55,
+      delay: (i % 3) * 0.06,
+      ease: 'power2.out',
+    });
+  });
+
+  gsap.utils.toArray<HTMLElement>('.market-detail').forEach((section) => {
+    if (reduceMotion) return;
+    const kids = section.querySelectorAll('.container-shell > div > *');
+    gsap.from(kids, {
+      scrollTrigger: { trigger: section, start: 'top 78%' },
+      opacity: 0,
+      y: 32,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: 'power2.out',
+    });
+  });
+
+  const railLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-market-rail]'));
+  const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-market-section]'));
+
+  const setActiveRail = (id: string) => {
+    railLinks.forEach((link) => {
+      link.classList.toggle('is-active', link.dataset.marketRail === id);
+    });
+  };
+
+  if (sections.length && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible?.target instanceof HTMLElement && visible.target.dataset.marketSection) {
+          setActiveRail(visible.target.dataset.marketSection);
+        }
+      },
+      { rootMargin: '-35% 0px -45% 0px', threshold: [0.15, 0.35, 0.55] },
+    );
+    sections.forEach((section) => observer.observe(section));
+    setActiveRail(sections[0].dataset.marketSection || 'forex');
+  }
+</script>

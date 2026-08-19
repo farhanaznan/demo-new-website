@@ -1,6 +1,12 @@
 ---
 import { links, nav } from '../content/site';
 import Logo from './Logo.astro';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => {
+  if (href.startsWith('/#')) return false;
+  return path === href || path.startsWith(`${href}/`);
+};
 ---
 
 <header
@@ -19,15 +25,9 @@ import Logo from './Logo.astro';
             href={item.href}
             class:list={[
               'nav-link text-ink-soft/80 transition hover:text-ocean',
-              item.href === '/promotion' && Astro.url.pathname.startsWith('/promotion')
-                ? 'is-active'
-                : '',
+              isActive(item.href) ? 'is-active' : '',
             ]}
-            aria-current={
-              item.href === '/promotion' && Astro.url.pathname.startsWith('/promotion')
-                ? 'page'
-                : undefined
-            }
+            aria-current={isActive(item.href) ? 'page' : undefined}
           >
             {item.label}
           </a>
@@ -68,10 +68,9 @@ import Logo from './Logo.astro';
             href={item.href}
             class:list={[
               'border border-transparent px-3 py-3 font-mono text-xs uppercase tracking-[0.18em] text-white/80 hover:border-signal/40 hover:bg-white/5 hover:text-white',
-              item.href === '/promotion' && Astro.url.pathname.startsWith('/promotion')
-                ? 'border-signal/40 bg-white/5 text-white'
-                : '',
+              isActive(item.href) ? 'border-signal/40 bg-white/5 text-white' : '',
             ]}
+            aria-current={isActive(item.href) ? 'page' : undefined}
           >
             {item.label}
           </a>

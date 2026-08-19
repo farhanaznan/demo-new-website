@@ -347,6 +347,158 @@ function initStepsProgress(): void {
   }
 }
 
+function initFeatureShuffle(reduceMotion: boolean): void {
+  const grid = document.querySelector<HTMLElement>('.features-grid');
+  if (!grid) return;
+
+  const cards = gsap.utils.toArray<HTMLElement>('.feature-card', grid);
+  if (cards.length < 2) return;
+
+  if (reduceMotion) return;
+
+  let busy = false;
+  let paused = false;
+  let armed = false;
+  let inView = false;
+  let timer: number | undefined;
+
+  const track = grid.parentElement;
+  const columnCount = () =>
+    getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length;
+
+  const shift = () => {
+    const cols = columnCount();
+    if (busy || paused || document.hidden || cols < 2) return;
+
+    const items = gsap.utils.toArray<HTMLElement>('.feature-card', grid);
+    if (items.length < 2) return;
+
+    busy = true;
+
+    const first = new Map(items.map((el) => [el, el.getBoundingClientRect()]));
+    const next: HTMLElement[] = [];
+    const wrapping = new Set<HTMLElement>();
+
+    for (let i = 0; i < items.length; i += cols) {
+      const row = items.slice(i, i + cols);
+      wrapping.add(row[row.length - 1]);
+      next.push(row[row.length - 1], ...row.slice(0, -1));
+    }
+
+    const step =
+      items.length >= 2
+        ? first.get(items[1])!.left - first.get(items[0])!.left
+        : first.get(items[0])!.width;
+
+    const ghosts: HTMLElement[] = [];
+    if (track) {
+      const trackRect = track.getBoundingClientRect();
+      wrapping.forEach((el) => {
+        const rect = first.get(el);
+        if (!rect) return;
+        const ghost = el.cloneNode(true) as HTMLElement;
+        ghost.removeAttribute('data-spotlight');
+        ghost.setAttribute('aria-hidden', 'true');
+        ghost.tabIndex = -1;
+        ghost.style.position = 'absolute';
+        ghost.style.left = `${rect.left - trackRect.left}px`;
+        ghost.style.top = `${rect.top - trackRect.top}px`;
+        ghost.style.width = `${rect.width}px`;
+        ghost.style.height = `${rect.height}px`;
+        ghost.style.margin = '0';
+        ghost.style.zIndex = '2';
+        ghost.style.pointerEvents = 'none';
+        track.appendChild(ghost);
+        ghosts.push(ghost);
+      });
+    }
+
+    next.forEach((el) => grid.appendChild(el));
+
+    const last = new Map(next.map((el) => [el, el.getBoundingClientRect()]));
+    next.forEach((el) => {
+      if (wrapping.has(el)) {
+        gsap.set(el, { x: -step, force3D: true });
+        return;
+      }
+      const from = first.get(el);
+      const to = last.get(el);
+      if (!from || !to) return;
+      gsap.set(el, { x: from.left - to.left, force3D: true });
+    });
+
+    const tl = gsap.timeline({
+      defaults: { duration: 1.2, ease: 'power1.inOut', force3D: true },
+      onComplete: () => {
+        ghosts.forEach((ghost) => ghost.remove());
+        busy = false;
+        gsap.set(items, { clearProps: 'transform' });
+      },
+    });
+
+    tl.to(ghosts, { x: step }, 0);
+    tl.to(next, { x: 0 }, 0);
+  };
+
+  const start = () => {
+    if (!armed || !inView) return;
+    window.clearInterval(timer);
+    timer = window.setInterval(shift, 3600);
+  };
+
+  const stop = () => {
+    window.clearInterval(timer);
+    timer = undefined;
+  };
+
+  grid.addEventListener('pointerenter', () => {
+    paused = true;
+  });
+  grid.addEventListener('pointerleave', () => {
+    paused = false;
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+    else start();
+  });
+
+  ScrollTrigger.create({
+    trigger: grid,
+    start: 'top 82%',
+    once: true,
+    onEnter: () => {
+      gsap.fromTo(
+        cards,
+        { y: 28, opacity: 0.001 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.55,
+          stagger: 0.06,
+          ease: 'power3.out',
+          clearProps: 'transform,opacity',
+          onComplete: () => {
+            armed = true;
+            start();
+          },
+        },
+      );
+    },
+  });
+
+  ScrollTrigger.create({
+    trigger: grid,
+    start: 'top bottom',
+    end: 'bottom top',
+    onToggle: (self) => {
+      inView = self.isActive;
+      if (inView) start();
+      else stop();
+    },
+  });
+}
+
 function initSectionHeaders(): void {
   gsap.utils.toArray<HTMLElement>('.section-intro').forEach((intro) => {
     ScrollTrigger.create({
@@ -509,9 +661,9 @@ export function initHomeAnimations(): void {
   initStepsProgress();
   initSectionHeaders();
   initSeaCustomers(reduceMotion);
+  initFeatureShuffle(reduceMotion);
 
   if (!reduceMotion) {
-    revealBatch('.feature-card');
     revealBatch('.account-panel');
     revealBatch('.market-item', { y: 32 });
     revealBatch('.step-item');

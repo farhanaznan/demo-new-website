@@ -46,12 +46,15 @@ const icons: Record<(typeof features)[number]['id'], string> = {
       </a>
     </div>
 
-    <div class="mt-8 grid gap-3 sm:mt-12 sm:grid-cols-2 sm:gap-4 lg:mt-16 lg:grid-cols-3 lg:gap-5">
+    <div class="features-track relative mt-8 overflow-hidden sm:mt-12 lg:mt-16">
+    <div
+      class="features-grid grid auto-rows-fr gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:gap-5"
+    >
       {
         features.map((feature, index) => (
           <article
             data-spotlight
-            class="feature-card spotlight-card group relative overflow-hidden border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm transition duration-300 hover:-translate-y-2 hover:border-signal/45 hover:bg-white/[0.1] hover:shadow-[0_28px_60px_rgba(0,0,0,0.35)] sm:p-7"
+            class="feature-card spotlight-card group relative h-full overflow-hidden border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm transition-[border-color,background-color,box-shadow] duration-300 hover:border-signal/45 hover:bg-white/[0.1] hover:shadow-[0_28px_60px_rgba(0,0,0,0.35)] sm:p-7"
           >
             <div class="mb-5 flex items-start justify-between gap-4">
               <div class="grid h-11 w-11 place-items-center border border-signal/30 bg-signal/15 text-signal transition duration-300 group-hover:border-signal group-hover:bg-signal group-hover:text-white">
@@ -69,6 +72,7 @@ const icons: Record<(typeof features)[number]['id'], string> = {
           </article>
         ))
       }
+    </div>
     </div>
   </div>
 </section>

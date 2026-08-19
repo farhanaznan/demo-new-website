@@ -45,10 +45,17 @@ const icons: Record<string, string> = {
       Trade Forex, metals, indices, shares, energies, crypto and more in one powerful ecosystem —
       with institutional-grade conditions and lightning-fast execution.
     </p>
-    <a href={links.register} class="btn-primary btn-magnetic mt-7 w-full px-8 py-4 text-base sm:mt-8 sm:w-auto">
-      Start Trading Now
-    </a>
-
+    <div class="mt-7 flex w-full flex-col items-center justify-center gap-3 sm:mt-8 sm:w-auto sm:flex-row">
+      <a href={links.register} class="btn-primary btn-magnetic w-full px-8 py-4 text-base sm:w-auto">
+        Start Trading Now
+      </a>
+      <a
+        href="/markets"
+        class="btn-secondary btn-magnetic w-full border-white/25 bg-transparent px-8 py-4 text-base text-white hover:border-white hover:text-white sm:w-auto"
+      >
+        Explore All Markets
+      </a>
+    </div>
     <div class="market-orbit-stage relative mx-auto mt-10 max-w-5xl sm:mt-16">
       <div
         class="pointer-events-none absolute left-1/2 top-[38%] hidden h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full border border-signal/25 sm:block sm:h-[22rem] sm:w-[22rem]"

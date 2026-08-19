@@ -14,7 +14,7 @@ export const links = {
 
 export const nav = [
   { label: 'Accounts', href: '/#accounts' },
-  { label: 'Markets', href: '/#markets' },
+  { label: 'Markets', href: '/markets' },
   { label: 'Platforms', href: '/#platforms' },
   { label: 'Promotions', href: '/promotion' },
   { label: 'Banking', href: '/#banking' },
