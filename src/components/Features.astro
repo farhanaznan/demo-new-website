@@ -1,5 +1,6 @@
 ---
 import { features, links } from '../content/site';
+import BrandWatermark from './BrandWatermark.astro';
 
 const icons: Record<(typeof features)[number]['id'], string> = {
   withdrawals: `<path d="M12 3v12m0 0-4-4m4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 18h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>`,
@@ -21,13 +22,14 @@ const icons: Record<(typeof features)[number]['id'], string> = {
       class="absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(245,250,252,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(245,250,252,0.12)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_78%)]"
     >
     </div>
+    <BrandWatermark class="right-[-12%] top-8 hidden rotate-12 sm:block lg:right-0" />
   </div>
 
   <div class="container-shell relative">
     <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
       <div class="section-intro max-w-2xl">
         <p class="text-xs font-semibold uppercase tracking-[0.22em] text-signal">Empower traders</p>
-        <h2 class="mt-3 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-[3.4rem] lg:leading-[1.05]">
+        <h2 class="mt-3 font-display text-3xl font-bold tracking-tight text-white sm:text-5xl lg:text-[3.4rem] lg:leading-[1.05]">
           An exceptional trading environment
         </h2>
         <p class="mt-5 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg">
@@ -37,7 +39,7 @@ const icons: Record<(typeof features)[number]['id'], string> = {
       </div>
       <a
         href={links.register}
-        class="btn-primary btn-magnetic shrink-0"
+        class="btn-primary btn-magnetic w-full shrink-0 sm:w-auto"
       >
         Open Live Account
       </a>
@@ -48,7 +50,7 @@ const icons: Record<(typeof features)[number]['id'], string> = {
         features.map((feature, index) => (
           <article
             data-spotlight
-            class="feature-card spotlight-card group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.06] p-7 backdrop-blur-sm transition duration-300 hover:-translate-y-2 hover:border-signal/45 hover:bg-white/[0.1] hover:shadow-[0_28px_60px_rgba(0,0,0,0.35)] sm:p-8"
+            class="feature-card spotlight-card group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur-sm transition duration-300 hover:-translate-y-2 hover:border-signal/45 hover:bg-white/[0.1] hover:shadow-[0_28px_60px_rgba(0,0,0,0.35)] sm:p-8"
           >
             <div class="mb-6 flex items-start justify-between gap-4">
               <div class="grid h-12 w-12 place-items-center rounded-xl bg-signal/15 text-signal ring-1 ring-signal/25 transition duration-300 group-hover:bg-signal group-hover:text-white group-hover:ring-signal">
@@ -60,7 +62,7 @@ const icons: Record<(typeof features)[number]['id'], string> = {
                 {String(index + 1).padStart(2, '0')}
               </span>
             </div>
-            <h3 class="font-display text-2xl font-bold tracking-tight text-white">{feature.title}</h3>
+            <h3 class="font-display text-xl font-bold tracking-tight text-white sm:text-2xl">{feature.title}</h3>
             <p class="mt-3 text-[0.95rem] leading-relaxed text-white/60">{feature.copy}</p>
             <div class="mt-6 h-px w-full origin-left scale-x-40 bg-gradient-to-r from-signal to-transparent transition duration-300 group-hover:scale-x-100" />
           </article>

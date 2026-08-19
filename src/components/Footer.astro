@@ -7,12 +7,12 @@ import Logo from './Logo.astro';
   <div class="container-shell section-pad !py-16">
     <div class="grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr]">
       <div>
-        <Logo tone="on-dark" class="h-12 w-auto sm:h-14" />
+        <Logo tone="on-dark" class="h-11 w-auto sm:h-14" />
         <p class="mt-5 max-w-md text-sm leading-relaxed text-white/70">
           Welcome to {brand.name}, where trading meets clarity. With a powerful platform and
           disciplined market access, we help traders pursue growth with precision and control.
         </p>
-        <div class="mt-6 flex flex-wrap gap-3">
+        <div class="mt-6 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <a href={links.register} class="btn-primary">Start Trading</a>
           <a
             href={links.login}

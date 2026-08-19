@@ -1,22 +1,43 @@
 ---
 interface Props {
   tone?: 'on-light' | 'on-dark';
+  variant?: 'lockup' | 'pill' | 'mark';
   class?: string;
+  decorative?: boolean;
 }
 
-const { tone = 'on-light', class: className = 'h-11 w-auto sm:h-12' } = Astro.props;
+const {
+  tone = 'on-light',
+  variant = 'lockup',
+  class: className = 'h-11 w-auto',
+  decorative = false,
+} = Astro.props;
 
 const src =
-  tone === 'on-dark'
-    ? '/brand/infinite-lockup-on-dark.png'
-    : '/brand/infinite-lockup-on-light.png';
+  variant === 'pill'
+    ? '/brand/infinite-lockup-pill.png'
+    : variant === 'mark'
+      ? tone === 'on-dark'
+        ? '/brand/infinite-on-dark-mark.png'
+        : '/brand/infinite-mark-on-light.png'
+      : tone === 'on-dark'
+        ? '/brand/infinite-lockup-on-dark.png'
+        : '/brand/infinite-lockup-on-light.png';
+
+const size =
+  variant === 'mark'
+    ? { width: 160, height: 70 }
+    : variant === 'pill'
+      ? { width: 240, height: 96 }
+      : { width: 220, height: 94 };
 ---
 
 <img
   src={src}
-  alt="Infinite"
-  width="220"
-  height="94"
+  alt={decorative ? '' : 'Infinite'}
+  width={size.width}
+  height={size.height}
   class:list={['infinite-logo', className]}
   decoding="async"
+  aria-hidden={decorative ? 'true' : undefined}
 />

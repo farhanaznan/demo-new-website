@@ -94,7 +94,7 @@ function initHero(reduceMotion: boolean): void {
 
   if (reduceMotion) {
     gsap.set(
-      ['.hero-brand', '.hero-letter', '.hero-title', '.hero-copy', '.hero-cta', '.hero-visual', '.float-chip', '.stats-panel'],
+      ['.hero-brand', '.hero-letter', '.hero-title', '.hero-copy', '.hero-cta', '.hero-visual', '.hero-visual-mobile', '.float-chip', '.stats-panel'],
       { clearProps: 'all', opacity: 1 },
     );
     return;
@@ -125,6 +125,7 @@ function initHero(reduceMotion: boolean): void {
   tl.from('.hero-title', { y: 48, opacity: 0, duration: 0.9 }, '-=0.45')
     .from('.hero-copy', { y: 28, opacity: 0, duration: 0.75 }, '-=0.5')
     .from('.hero-cta', { y: 20, opacity: 0, duration: 0.6 }, '-=0.4')
+    .from('.hero-visual-mobile', { y: 24, opacity: 0, duration: 0.7 }, '-=0.35')
     .from('.hero-visual', { x: 60, opacity: 0, duration: 1.05 }, '-=0.7')
     .from('.float-chip', { y: 24, opacity: 0, duration: 0.55, stagger: 0.1 }, '-=0.55')
     .from('.stats-panel', { y: 36, opacity: 0, duration: 0.8 }, '-=0.45');

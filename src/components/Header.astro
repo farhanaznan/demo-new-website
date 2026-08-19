@@ -5,11 +5,11 @@ import Logo from './Logo.astro';
 
 <header
   id="site-header"
-  class="fixed inset-x-0 top-0 z-50 border-b border-transparent transition-[background,border,box-shadow] duration-300"
+  class="fixed inset-x-0 top-0 z-50 border-b border-transparent pt-[env(safe-area-inset-top)] transition-[background,border,box-shadow] duration-300"
 >
-  <div class="container-shell flex h-16 items-center justify-between gap-4 sm:h-18">
-    <a href="/" class="group flex items-center" aria-label="Infinite home">
-      <Logo tone="on-light" class="h-12 w-auto sm:h-14" />
+  <div class="container-shell flex h-16 items-center justify-between gap-3 sm:h-[4.5rem] sm:gap-4">
+    <a href="/" class="group flex min-w-0 shrink items-center" aria-label="Infinite home">
+      <Logo variant="pill" class="h-9 w-auto sm:h-11" />
     </a>
 
     <nav class="hidden items-center gap-7 lg:flex" aria-label="Primary">
@@ -35,11 +35,9 @@ import Logo from './Logo.astro';
       }
     </nav>
 
-    <div class="flex items-center gap-2 sm:gap-3">
-      <a href={links.login} class="btn-secondary hidden px-4 py-2.5 sm:inline-flex"
-        >Log In</a
-      >
-      <a href={links.register} class="btn-primary px-4 py-2.5">Sign Up</a>
+    <div class="flex shrink-0 items-center gap-2">
+      <a href={links.login} class="btn-secondary hidden px-4 py-2.5 lg:inline-flex">Log In</a>
+      <a href={links.register} class="btn-primary hidden px-4 py-2.5 lg:inline-flex">Sign Up</a>
       <button
         id="nav-toggle"
         type="button"
@@ -63,7 +61,7 @@ import Logo from './Logo.astro';
           <a
             href={item.href}
             class:list={[
-              'rounded-md px-3 py-2.5 text-sm font-medium text-ink hover:bg-mist',
+              'rounded-md px-3 py-3 text-sm font-medium text-ink hover:bg-mist',
               item.href === '/promotion' && Astro.url.pathname.startsWith('/promotion')
                 ? 'bg-mist text-ocean'
                 : '',
@@ -73,9 +71,10 @@ import Logo from './Logo.astro';
           </a>
         ))
       }
-      <a href={links.login} class="rounded-md px-3 py-2.5 text-sm font-medium text-ink hover:bg-mist"
+      <a href={links.login} class="rounded-md px-3 py-3 text-sm font-medium text-ink hover:bg-mist"
         >Log In</a
       >
+      <a href={links.register} class="btn-primary mt-2 w-full">Sign Up</a>
     </nav>
   </div>
 </header>
