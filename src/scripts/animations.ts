@@ -13,17 +13,18 @@ function revealBatch(selector: string, extras: gsap.TweenVars = {}): void {
   if (!elements.length) return;
 
   elements.forEach((element) => {
-    gsap.from(element, {
-      scrollTrigger: {
-        trigger: element,
-        start: 'top 90%',
-        once: true,
+    const fromY = typeof extras.y === 'number' ? extras.y : 40;
+    ScrollTrigger.create({
+      trigger: element,
+      start: 'top 90%',
+      once: true,
+      onEnter: () => {
+        gsap.fromTo(
+          element,
+          { y: fromY },
+          { y: 0, duration: 0.55, ease: 'power3.out', clearProps: 'transform' },
+        );
       },
-      y: 40,
-      opacity: 0,
-      duration: 0.85,
-      ease: 'power3.out',
-      ...extras,
     });
   });
 }
@@ -94,7 +95,7 @@ function initHero(reduceMotion: boolean): void {
 
   if (reduceMotion) {
     gsap.set(
-      ['.hero-brand', '.hero-letter', '.hero-title', '.hero-copy', '.hero-cta', '.hero-visual', '.hero-visual-mobile', '.float-chip', '.stats-panel'],
+      ['.hero-kicker', '.hero-brand', '.hero-letter', '.hero-title', '.hero-copy', '.hero-cta', '.hero-visual', '.hero-visual-mobile', '.float-chip', '.stats-panel'],
       { clearProps: 'all', opacity: 1 },
     );
     return;
@@ -103,14 +104,16 @@ function initHero(reduceMotion: boolean): void {
   const tl = gsap.timeline({
     defaults: { ease: 'power3.out' },
     onComplete: () => {
-      gsap.set(['.hero-cta > *', '.hero-title', '.hero-copy', '.hero-brand', '.stats-panel'], {
+      gsap.set(['.hero-cta > *', '.hero-title', '.hero-copy', '.hero-brand', '.hero-kicker', '.stats-panel'], {
         clearProps: 'opacity,transform',
       });
     },
   });
 
+  tl.from('.hero-kicker', { y: 16, opacity: 0, duration: 0.5 });
+
   if (isImageBrand) {
-    tl.from('.hero-brand', { y: 28, opacity: 0, scale: 0.96, duration: 0.85 });
+    tl.from('.hero-brand', { y: 28, opacity: 0, scale: 0.96, duration: 0.85 }, '-=0.2');
   } else {
     tl.from('.hero-letter', {
       yPercent: 120,
@@ -346,17 +349,17 @@ function initStepsProgress(): void {
 
 function initSectionHeaders(): void {
   gsap.utils.toArray<HTMLElement>('.section-intro').forEach((intro) => {
-    gsap.from(intro.children, {
-      scrollTrigger: {
-        trigger: intro,
-        start: 'top 85%',
-        once: true,
+    ScrollTrigger.create({
+      trigger: intro,
+      start: 'top 88%',
+      once: true,
+      onEnter: () => {
+        gsap.fromTo(
+          intro.children,
+          { y: 14 },
+          { y: 0, duration: 0.5, stagger: 0.05, ease: 'power3.out', clearProps: 'transform' },
+        );
       },
-      y: 28,
-      opacity: 0,
-      duration: 0.75,
-      stagger: 0.08,
-      ease: 'power3.out',
     });
   });
 }
@@ -442,16 +445,28 @@ function initSeaCustomers(reduceMotion: boolean): void {
   });
 
   if (!reduceMotion) {
-    gsap.from(cards, {
-      scrollTrigger: { trigger: section, start: 'top 80%', once: true },
-      y: 28,
-      opacity: 0,
-      duration: 0.7,
-      stagger: 0.05,
-      ease: 'power3.out',
+    const grid = section.querySelector('.sea-grid') || section;
+    ScrollTrigger.create({
+      trigger: grid,
+      start: 'top 92%',
+      once: true,
+      onEnter: () => {
+        gsap.fromTo(
+          cards,
+          { y: 12 },
+          {
+            y: 0,
+            duration: 0.45,
+            stagger: 0.03,
+            ease: 'power3.out',
+            clearProps: 'transform',
+          },
+        );
+      },
     });
 
     document.querySelectorAll<HTMLElement>('.sea-marquee').forEach((row, index) => {
+      if (window.getComputedStyle(row.parentElement || row).display === 'none') return;
       const track = row.querySelector<HTMLElement>('.sea-marquee-track');
       if (!track) return;
 
@@ -507,12 +522,17 @@ export function initHomeAnimations(): void {
 
     const finalCta = document.querySelector('.final-cta');
     if (finalCta) {
-      gsap.from(finalCta, {
-        scrollTrigger: { trigger: finalCta, start: 'top 85%', once: true },
-        y: 48,
-        opacity: 0,
-        duration: 0.95,
-        ease: 'power3.out',
+      ScrollTrigger.create({
+        trigger: finalCta,
+        start: 'top 85%',
+        once: true,
+        onEnter: () => {
+          gsap.fromTo(
+            finalCta,
+            { y: 24 },
+            { y: 0, duration: 0.6, ease: 'power3.out', clearProps: 'transform' },
+          );
+        },
       });
     }
   }

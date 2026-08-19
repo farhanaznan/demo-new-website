@@ -19,20 +19,21 @@ const icons: Record<(typeof features)[number]['id'], string> = {
     >
     </div>
     <div
-      class="absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(245,250,252,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(245,250,252,0.12)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_78%)]"
+      class="absolute inset-0 opacity-[0.16] [background-image:linear-gradient(rgba(245,250,252,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(245,250,252,0.12)_1px,transparent_1px)] [background-size:40px_40px]"
     >
     </div>
+    <div class="hatch-overlay-dark absolute inset-0"></div>
     <BrandWatermark class="right-[-12%] top-8 hidden rotate-12 sm:block lg:right-0" />
   </div>
 
   <div class="container-shell relative">
-    <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-8">
       <div class="section-intro max-w-2xl">
-        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-signal">Empower traders</p>
-        <h2 class="mt-3 font-display text-3xl font-bold tracking-tight text-white sm:text-5xl lg:text-[3.4rem] lg:leading-[1.05]">
+        <p class="tech-kicker">Empower traders · module 01</p>
+        <h2 class="mt-3 font-display text-[1.65rem] font-bold tracking-tight text-white sm:text-5xl lg:text-[3.4rem] lg:leading-[1.05]">
           An exceptional trading environment
         </h2>
-        <p class="mt-5 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg">
+        <p class="mt-4 max-w-xl text-sm leading-relaxed text-white/65 sm:mt-5 sm:text-lg">
           Everything you need for disciplined execution — speed, transparency, and support that stays
           with you through every session.
         </p>
@@ -45,26 +46,26 @@ const icons: Record<(typeof features)[number]['id'], string> = {
       </a>
     </div>
 
-    <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-6">
+    <div class="mt-8 grid gap-3 sm:mt-12 sm:grid-cols-2 sm:gap-4 lg:mt-16 lg:grid-cols-3 lg:gap-5">
       {
         features.map((feature, index) => (
           <article
             data-spotlight
-            class="feature-card spotlight-card group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur-sm transition duration-300 hover:-translate-y-2 hover:border-signal/45 hover:bg-white/[0.1] hover:shadow-[0_28px_60px_rgba(0,0,0,0.35)] sm:p-8"
+            class="feature-card spotlight-card group relative overflow-hidden border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm transition duration-300 hover:-translate-y-2 hover:border-signal/45 hover:bg-white/[0.1] hover:shadow-[0_28px_60px_rgba(0,0,0,0.35)] sm:p-7"
           >
-            <div class="mb-6 flex items-start justify-between gap-4">
-              <div class="grid h-12 w-12 place-items-center rounded-xl bg-signal/15 text-signal ring-1 ring-signal/25 transition duration-300 group-hover:bg-signal group-hover:text-white group-hover:ring-signal">
-                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <div class="mb-5 flex items-start justify-between gap-4">
+              <div class="grid h-11 w-11 place-items-center border border-signal/30 bg-signal/15 text-signal transition duration-300 group-hover:border-signal group-hover:bg-signal group-hover:text-white">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <Fragment set:html={icons[feature.id]} />
                 </svg>
               </div>
-              <span class="font-display text-sm font-bold tabular-nums text-white/25 transition group-hover:text-signal">
+              <span class="font-mono text-xs font-normal tabular-nums text-white/30 transition group-hover:text-signal">
                 {String(index + 1).padStart(2, '0')}
               </span>
             </div>
-            <h3 class="font-display text-xl font-bold tracking-tight text-white sm:text-2xl">{feature.title}</h3>
-            <p class="mt-3 text-[0.95rem] leading-relaxed text-white/60">{feature.copy}</p>
-            <div class="mt-6 h-px w-full origin-left scale-x-40 bg-gradient-to-r from-signal to-transparent transition duration-300 group-hover:scale-x-100" />
+            <h3 class="font-display text-lg font-bold tracking-tight text-white sm:text-2xl">{feature.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-white/60 sm:mt-3 sm:text-[0.95rem]">{feature.copy}</p>
+            <div class="mt-5 h-px w-full origin-left scale-x-40 bg-gradient-to-r from-signal to-transparent transition duration-300 group-hover:scale-x-100" />
           </article>
         ))
       }

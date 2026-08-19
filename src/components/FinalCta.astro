@@ -4,11 +4,12 @@ import BrandWatermark from './BrandWatermark.astro';
 import Logo from './Logo.astro';
 ---
 
-<section class="section-pad pt-0 pb-16 sm:pb-24">
+<section class="section-pad pt-0 pb-12 sm:pb-20">
   <div class="container-shell">
     <div
-      class="final-cta relative overflow-hidden rounded-[1.5rem] bg-[linear-gradient(135deg,#06172D_0%,#08111F_45%,#168BFF_160%)] px-5 py-12 text-center text-white sm:rounded-[2rem] sm:px-10 sm:py-14"
+      class="final-cta mech-corners relative overflow-hidden bg-[linear-gradient(135deg,#06172D_0%,#08111F_45%,#168BFF_160%)] px-4 py-10 text-center text-white sm:px-10 sm:py-14"
     >
+      <div class="hatch-overlay-dark pointer-events-none absolute inset-0" aria-hidden="true"></div>
       <BrandWatermark class="-left-8 top-0 opacity-[0.14]" />
       <div
         class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(22,139,255,0.35),transparent_40%),radial-gradient(circle_at_80%_80%,rgba(255,255,255,0.08),transparent_35%)]"
@@ -16,16 +17,17 @@ import Logo from './Logo.astro';
       >
       </div>
       <div class="relative mx-auto max-w-2xl">
-        <div class="mx-auto flex w-[min(100%,13rem)] justify-center sm:w-[min(100%,16rem)]">
+        <p class="tech-kicker justify-center">Ready · deploy</p>
+        <div class="mx-auto mt-4 flex w-[min(100%,13rem)] justify-center sm:w-[min(100%,16rem)]">
           <Logo tone="on-dark" class="h-auto w-full" />
         </div>
-        <h2 class="mt-6 font-display text-[1.7rem] font-bold tracking-tight sm:text-4xl">
+        <h2 class="mt-5 font-display text-[1.55rem] font-bold tracking-tight sm:mt-6 sm:text-4xl">
           Be better. Build a brighter future.
         </h2>
         <p class="mt-4 text-sm leading-relaxed text-white/70 sm:text-base">
           Join traders who trust {brand.name} to power their journey in the global markets.
         </p>
-        <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
+        <div class="mt-7 flex flex-col justify-center gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
           <a href={links.register} class="btn-primary btn-magnetic">Start Trading Now</a>
           <a
             href={links.login}
