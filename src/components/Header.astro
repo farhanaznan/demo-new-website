@@ -47,7 +47,7 @@ import Logo from './Logo.astro';
       <button
         id="nav-toggle"
         type="button"
-        class="inline-flex h-10 w-10 items-center justify-center border border-line bg-white/85 lg:hidden"
+        class="relative z-10 inline-flex h-10 w-10 shrink-0 items-center justify-center border border-line bg-white/85 lg:hidden"
         aria-expanded="false"
         aria-controls="mobile-nav"
         aria-label="Open menu"
@@ -60,7 +60,7 @@ import Logo from './Logo.astro';
     </div>
   </div>
 
-  <div id="mobile-nav" class="hidden border-t border-line bg-[#0b2545] lg:hidden">
+  <div id="mobile-nav" class="hidden border-t border-line bg-[#0b2545] lg:!hidden">
     <nav class="container-shell flex flex-col gap-1 py-3" aria-label="Mobile">
       {
         nav.map((item) => (
