@@ -15,7 +15,7 @@ import { accounts, links } from '../content/site';
 
     <div class="account-panel mt-10 overflow-hidden rounded-[1.75rem] border border-line bg-white/80 shadow-[0_24px_60px_rgba(7,24,34,0.08)]">
       <div
-        class="flex gap-2 overflow-x-auto border-b border-line bg-mist/60 p-3 scrollbar-thin"
+        class="flex gap-2 overflow-x-auto overscroll-x-contain border-b border-line bg-mist/60 p-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         role="tablist"
         aria-label="Account types"
         id="account-tabs"
@@ -31,7 +31,7 @@ import { accounts, links } from '../content/site';
               tabindex={index === 0 ? 0 : -1}
               data-account-tab={index}
               class:list={[
-                'account-tab shrink-0 rounded-xl px-4 py-2.5 text-sm font-semibold transition duration-300',
+                'account-tab shrink-0 rounded-xl px-3 py-2.5 text-sm font-semibold transition duration-300 sm:px-4',
                 index === 0
                   ? 'is-active bg-ocean text-white shadow-[0_10px_24px_rgba(10,77,104,0.28)]'
                   : 'bg-white/70 text-ink-soft hover:bg-white hover:text-ocean',
