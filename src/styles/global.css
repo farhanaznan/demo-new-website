@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Exo 2", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
 
-  --color-ink: #071822;
-  --color-ink-soft: #1a3340;
-  --color-ocean: #0a4d68;
-  --color-signal: #14b8a6;
-  --color-signal-deep: #0f766e;
-  --color-mist: #e7f2f6;
-  --color-paper: #f5fafc;
-  --color-line: #c9dde6;
-  --color-muted: #5b7380;
+  --color-ink: #08111f;
+  --color-ink-soft: #0b2545;
+  --color-ocean: #0b2545;
+  --color-signal: #168bff;
+  --color-signal-deep: #0d6fd6;
+  --color-mist: #e8eef5;
+  --color-paper: #f5f7fa;
+  --color-line: #c5d0dc;
+  --color-muted: #5c6f82;
 }
 
 @layer base {
@@ -23,9 +23,9 @@
   body {
     @apply bg-paper font-sans text-ink antialiased;
     background-image:
-      radial-gradient(1200px 600px at 10% -10%, rgba(20, 184, 166, 0.12), transparent 55%),
-      radial-gradient(900px 500px at 90% 0%, rgba(10, 77, 104, 0.1), transparent 50%),
-      linear-gradient(180deg, #f5fafc 0%, #eef6f9 40%, #f5fafc 100%);
+      radial-gradient(1200px 600px at 10% -10%, rgba(22, 139, 255, 0.14), transparent 55%),
+      radial-gradient(900px 500px at 90% 0%, rgba(11, 37, 69, 0.12), transparent 50%),
+      linear-gradient(180deg, #f5f7fa 0%, #e8eef5 40%, #f5f7fa 100%);
     min-height: 100vh;
   }
 
@@ -64,7 +64,7 @@
   }
 
   .btn-primary {
-    @apply relative inline-flex items-center justify-center overflow-hidden rounded-md bg-ocean px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal;
+    @apply relative inline-flex items-center justify-center overflow-hidden rounded-md bg-signal px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-ocean focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal;
   }
 
   .btn-primary::after {
@@ -151,7 +151,7 @@
   border-radius: inherit;
   background: radial-gradient(
     420px circle at var(--spot-x) var(--spot-y),
-    rgba(20, 184, 166, 0.16),
+    rgba(22, 139, 255, 0.16),
     transparent 45%
   );
   opacity: 0;
@@ -166,8 +166,8 @@
 
 .hero-grid {
   background-image:
-    linear-gradient(rgba(10, 77, 104, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(10, 77, 104, 0.08) 1px, transparent 1px);
+    linear-gradient(rgba(11, 37, 69, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 37, 69, 0.08) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(circle at center, black 20%, transparent 75%);
 }
@@ -176,8 +176,15 @@
   animation: pulse-dot 1.6s ease-in-out infinite;
 }
 
+.infinite-logo {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
 .ticker.is-up {
-  color: #5eead4;
+  color: #7ec4ff;
 }
 
 .ticker.is-down {

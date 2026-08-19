@@ -22,7 +22,7 @@ export const promotion = {
     {
       step: '01',
       title: 'Open & Verify Your Account',
-      copy: 'Create your demo-new account and complete verification to unlock funding.',
+      copy: 'Create your Infinite account and complete verification to unlock funding.',
     },
     {
       step: '02',
@@ -155,7 +155,7 @@ export const promotion = {
       items: [
         'By participating, the client acknowledges and agrees to these terms and conditions.',
         'Forex and CFDs are leveraged products involving a high level of risk and may not be suitable for all investors. Clients can lose all invested capital.',
-        'demo-new will not be liable for losses arising from participation in this promotion except where liability cannot be excluded by law.',
+        'Infinite will not be liable for losses arising from participation in this promotion except where liability cannot be excluded by law.',
       ],
     },
     {

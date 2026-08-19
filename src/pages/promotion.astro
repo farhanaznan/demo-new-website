@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Logo from '../components/Logo.astro';
 import { brand, links } from '../content/site';
 import { promotion as promo } from '../content/promotion';
 ---
@@ -13,11 +14,8 @@ import { promotion as promo } from '../content/promotion';
     <div
       class="mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white px-4 py-3 shadow-[0_16px_40px_rgba(0,0,0,0.25)] sm:px-5"
     >
-      <a href="/" class="flex items-center gap-2.5" aria-label={`${brand.name} home`}>
-        <span class="grid h-9 w-9 place-items-center rounded-full bg-ocean text-sm font-bold text-white"
-          >{brand.mark}</span
-        >
-        <span class="font-display text-lg font-extrabold tracking-[0.08em] text-ink">{brand.name}</span>
+      <a href="/" class="flex items-center" aria-label={`${brand.name} home`}>
+        <Logo tone="on-light" class="h-11 w-auto sm:h-12" />
       </a>
 
       <nav class="hidden items-center gap-6 md:flex" aria-label="Promotion">
@@ -68,7 +66,7 @@ import { promotion as promo } from '../content/promotion';
 
         <div class="promo-visual relative mx-auto w-full max-w-md">
           <div
-            class="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-[#0d6a86] via-ocean to-[#071822] p-8 shadow-[0_40px_100px_rgba(0,0,0,0.45)]"
+            class="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-[#0B2545] via-[#06172D] to-[#08111F] p-8 shadow-[0_40px_100px_rgba(0,0,0,0.45)]"
           >
             <div class="absolute -right-8 -top-8 h-40 w-40 rounded-full bg-signal/30 blur-2xl"></div>
             <p class="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">Deposit Match</p>
@@ -86,14 +84,14 @@ import { promotion as promo } from '../content/promotion';
 
       <!-- Countdown + period -->
       <div
-        class="relative mx-auto mt-12 grid max-w-6xl gap-4 rounded-[1.75rem] border border-signal/25 bg-[#0a1620]/80 p-5 backdrop-blur sm:p-6 lg:grid-cols-[1.2fr_0.8fr]"
+        class="relative mx-auto mt-12 grid max-w-6xl gap-4 rounded-[1.75rem] border border-signal/25 bg-[#06172D]/80 p-5 backdrop-blur sm:p-6 lg:grid-cols-[1.2fr_0.8fr]"
       >
         <div>
           <h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-white/50">Offer Pulse</h3>
           <div class="mt-4 grid grid-cols-4 gap-2 sm:gap-3" id="promo-countdown" data-end={promo.endDate}>
             {
               ['Days', 'Hours', 'Minutes', 'Seconds'].map((label) => (
-                <div class="rounded-xl border border-white/10 bg-[#102433] px-2 py-4 text-center sm:px-3">
+                <div class="rounded-xl border border-white/10 bg-[#0B2545] px-2 py-4 text-center sm:px-3">
                   <p class="font-display text-2xl font-bold tabular-nums text-white sm:text-3xl" data-unit={label.toLowerCase()}>
                     00
                   </p>
@@ -110,7 +108,7 @@ import { promotion as promo } from '../content/promotion';
             {promo.periodLabel}
           </h3>
           <div
-            class="mt-4 rounded-xl bg-signal px-4 py-4 text-center font-display text-lg font-bold tracking-wide text-ink sm:text-xl"
+            class="mt-4 rounded-xl bg-signal px-4 py-4 text-center font-display text-lg font-bold tracking-wide text-white sm:text-xl"
           >
             {promo.periodValue}
           </div>
@@ -264,7 +262,7 @@ import { promotion as promo } from '../content/promotion';
   <footer class="border-t border-white/10 px-5 py-10 sm:px-8 lg:px-12">
     <div class="mx-auto flex max-w-6xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
       <div>
-        <p class="font-display text-lg font-bold tracking-[0.08em] text-white">{brand.name}</p>
+        <Logo tone="on-dark" class="h-12 w-auto" />
         <p class="mt-2 max-w-md text-sm text-white/50">
           Trading leveraged products involves significant risk and may not be suitable for all
           investors.
@@ -286,15 +284,15 @@ import { promotion as promo } from '../content/promotion';
 <style is:global>
   .promo-page {
     background:
-      radial-gradient(900px 500px at 15% -10%, rgba(20, 184, 166, 0.18), transparent 55%),
-      radial-gradient(700px 400px at 90% 10%, rgba(10, 77, 104, 0.35), transparent 50%),
-      linear-gradient(180deg, #071822 0%, #050d14 45%, #071822 100%);
+      radial-gradient(900px 500px at 15% -10%, rgba(22, 139, 255, 0.18), transparent 55%),
+      radial-gradient(700px 400px at 90% 10%, rgba(11, 37, 69, 0.45), transparent 50%),
+      linear-gradient(180deg, #08111F 0%, #06172D 45%, #08111F 100%);
     color: white;
     min-height: 100vh;
   }
 
   .promo-page .scroll-progress-bar {
-    background: linear-gradient(90deg, #0a4d68, #14b8a6, #e8c87a);
+    background: linear-gradient(90deg, #06172D, #168BFF, #A7B3C4);
   }
 
   .promo-cta {
@@ -302,7 +300,7 @@ import { promotion as promo } from '../content/promotion';
     gap: 0.5rem;
     border-radius: 0.75rem;
     background: linear-gradient(135deg, #e8c87a 0%, #c9a24b 55%, #a8842f 100%);
-    color: #071822;
+    color: #08111f;
     font-weight: 700;
     font-size: 0.95rem;
     padding: 0.9rem 1.35rem;

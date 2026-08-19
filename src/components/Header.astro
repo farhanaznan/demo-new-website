@@ -1,5 +1,6 @@
 ---
-import { brand, links, nav } from '../content/site';
+import { links, nav } from '../content/site';
+import Logo from './Logo.astro';
 ---
 
 <header
@@ -7,15 +8,8 @@ import { brand, links, nav } from '../content/site';
   class="fixed inset-x-0 top-0 z-50 border-b border-transparent transition-[background,border,box-shadow] duration-300"
 >
   <div class="container-shell flex h-16 items-center justify-between gap-4 sm:h-18">
-    <a href="/" class="group flex items-center gap-2.5" aria-label={`${brand.name} home`}>
-      <span
-        class="grid h-9 w-9 place-items-center rounded-full bg-ocean text-sm font-bold text-white shadow-[0_8px_24px_rgba(10,77,104,0.35)]"
-      >
-        {brand.mark}
-      </span>
-      <span class="font-display text-lg font-extrabold tracking-[0.08em] text-ink sm:text-xl"
-        >{brand.name}</span
-      >
+    <a href="/" class="group flex items-center" aria-label="Infinite home">
+      <Logo tone="on-light" class="h-12 w-auto sm:h-14" />
     </a>
 
     <nav class="hidden items-center gap-7 lg:flex" aria-label="Primary">

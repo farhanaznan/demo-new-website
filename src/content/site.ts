@@ -1,6 +1,6 @@
 export const brand = {
-  name: 'demo-new',
-  mark: 'D',
+  name: 'Infinite',
+  mark: 'INFINITE',
   tagline: 'Trade Better. Build a Brighter Future.',
   description:
     'Reliable access to global markets with a focus on precision, stability, and control.',
@@ -9,7 +9,7 @@ export const brand = {
 export const links = {
   login: 'https://global-oe.com/account/signin',
   register: 'https://global-oe.com/account/register',
-  supportEmail: 'support@demo-new.trade',
+  supportEmail: 'support@global-oe.com',
 } as const;
 
 export const nav = [
@@ -66,7 +66,7 @@ export const performance = [
   {
     value: '1B+',
     label: 'Trades executed',
-    copy: 'Consistent, transparent conditions across demo-new platforms.',
+    copy: 'Consistent, transparent conditions across Infinite platforms.',
   },
   {
     value: '<10ms',
@@ -76,7 +76,7 @@ export const performance = [
   {
     value: '30K+',
     label: 'Active clients',
-    copy: 'Traders worldwide trusting demo-new to power their journey.',
+    copy: 'Traders worldwide trusting Infinite to power their journey.',
   },
 ] as const;
 

@@ -1,0 +1,22 @@
+---
+interface Props {
+  tone?: 'on-light' | 'on-dark';
+  class?: string;
+}
+
+const { tone = 'on-light', class: className = 'h-11 w-auto sm:h-12' } = Astro.props;
+
+const src =
+  tone === 'on-dark'
+    ? '/brand/infinite-lockup-on-dark.png'
+    : '/brand/infinite-lockup-on-light.png';
+---
+
+<img
+  src={src}
+  alt="Infinite"
+  width="220"
+  height="94"
+  class:list={['infinite-logo', className]}
+  decoding="async"
+/>
