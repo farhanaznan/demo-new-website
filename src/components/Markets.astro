@@ -16,7 +16,7 @@ const icons: Record<string, string> = {
 <section id="markets" class="markets-orbit relative overflow-hidden">
   <div class="absolute inset-0 bg-[#06172D]"></div>
   <div
-    class="pointer-events-none absolute left-1/2 top-1/2 h-[42rem] w-[42rem] -translate-x-1/2 -translate-y-[42%] rounded-full bg-[radial-gradient(circle,rgba(22,139,255,0.26)_0%,transparent_65%)]"
+    class="market-orbit-ambient pointer-events-none absolute left-1/2 top-1/2 h-[42rem] w-[42rem] -translate-x-1/2 -translate-y-[42%] rounded-full bg-[radial-gradient(circle,rgba(22,139,255,0.26)_0%,transparent_65%)]"
     aria-hidden="true"
   >
   </div>
@@ -28,31 +28,42 @@ const icons: Record<string, string> = {
   </div>
 
   <div class="relative mx-auto max-w-6xl px-5 py-20 text-center sm:px-8 lg:py-32">
-    <div class="mx-auto mb-7 flex justify-center">
-      <Logo tone="on-dark" class="h-16 w-auto sm:h-20" />
+    <div class="market-orbit-intro">
+      <div class="mx-auto mb-7 flex justify-center">
+        <Logo tone="on-dark" class="market-orbit-logo h-16 w-auto sm:h-20" />
+      </div>
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-signal">Markets</p>
+      <h2 class="mt-4 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-7xl">
+        Trade all markets.<br />Boundless opportunity.
+      </h2>
+      <p class="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-white/70 sm:text-xl">
+        Trade Forex, metals, indices, shares, energies, crypto and more in one powerful ecosystem —
+        with institutional-grade conditions and lightning-fast execution.
+      </p>
+      <a href={links.register} class="btn-primary btn-magnetic mt-8 w-full px-8 py-4 text-base sm:w-auto">
+        Start Trading Now
+      </a>
     </div>
-    <p class="text-sm font-semibold uppercase tracking-[0.22em] text-signal">Markets</p>
-    <h2 class="mt-4 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-7xl">
-      Trade all markets.<br />Boundless opportunity.
-    </h2>
-    <p class="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-white/70 sm:text-xl">
-      Trade Forex, metals, indices, shares, energies, crypto and more in one powerful ecosystem —
-      with institutional-grade conditions and lightning-fast execution.
-    </p>
-    <a href={links.register} class="btn-primary btn-magnetic mt-8 w-full px-8 py-4 text-base sm:w-auto">
-      Start Trading Now
-    </a>
 
     <div class="market-orbit-stage relative mx-auto mt-16 max-w-5xl">
-      <div
-        class="pointer-events-none absolute left-1/2 top-[38%] h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full border border-signal/25 sm:h-[22rem] sm:w-[22rem]"
-        aria-hidden="true"
-      >
-      </div>
-      <div
-        class="pointer-events-none absolute left-1/2 top-[38%] h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full bg-signal/10 blur-2xl sm:h-72 sm:w-72"
-        aria-hidden="true"
-      >
+      <div class="market-orbit-fx pointer-events-none absolute inset-0" aria-hidden="true">
+        <div
+          class="market-orbit-ring market-orbit-ring--outer absolute left-1/2 top-[38%] h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-signal/20 sm:h-[24rem] sm:w-[24rem]"
+        >
+        </div>
+        <div
+          class="market-orbit-ring market-orbit-ring--inner absolute left-1/2 top-[38%] h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full border border-signal/30 sm:h-[18rem] sm:w-[18rem]"
+        >
+        </div>
+        <div
+          class="market-orbit-glow absolute left-1/2 top-[38%] h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full bg-signal/10 blur-2xl sm:h-72 sm:w-72"
+        >
+        </div>
+        <div class="market-orbit-scan absolute left-1/2 top-[38%] h-72 w-72 -translate-x-1/2 -translate-y-1/2 sm:h-[22rem] sm:w-[22rem]">
+        </div>
+        <div class="market-orbit-particles absolute left-1/2 top-[38%] h-72 w-72 -translate-x-1/2 -translate-y-1/2 sm:h-[22rem] sm:w-[22rem]">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
       </div>
 
       <div
@@ -72,10 +83,16 @@ const icons: Record<string, string> = {
               aria-controls="market-orbit-panel"
               id={`market-tab-${index}`}
             >
-              <span
-                class="market-orbit-icon grid place-items-center rounded-full border border-white/15 bg-[#0b2545] text-white/80 shadow-[0_0_0_0_rgba(22,139,255,0)] transition duration-300"
-                set:html={icons[market.id]}
-              />
+              <span class="market-orbit-icon-wrap relative">
+                <span
+                  class="market-orbit-pulse pointer-events-none absolute inset-0 rounded-full"
+                  aria-hidden="true"
+                />
+                <span
+                  class="market-orbit-icon relative z-10 grid place-items-center rounded-full border border-white/15 bg-[#0b2545] text-white/80 shadow-[0_0_0_0_rgba(22,139,255,0)]"
+                  set:html={icons[market.id]}
+                />
+              </span>
               <span class="market-orbit-name text-[11px] font-semibold uppercase tracking-[0.12em] text-white/70 sm:text-xs">
                 {market.title}
               </span>
@@ -105,7 +122,7 @@ const icons: Record<string, string> = {
         <ul class="mt-4 flex flex-wrap justify-center gap-2" data-market-points>
           {
             markets[2].points.map((point) => (
-              <li class="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/75">
+              <li class="market-orbit-point rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/75">
                 {point}
               </li>
             ))
@@ -117,14 +134,37 @@ const icons: Record<string, string> = {
 </section>
 
 <style>
+  .market-orbit-icon-wrap {
+    display: grid;
+    place-items: center;
+  }
+
   .market-orbit-icon {
     width: 4.25rem;
     height: 4.25rem;
+    transition:
+      width 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+      height 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+      border-color 0.3s ease,
+      box-shadow 0.35s ease,
+      color 0.25s ease;
   }
 
   .market-orbit-icon :global(svg) {
     width: 1.85rem;
     height: 1.85rem;
+    transition: width 0.35s ease, height 0.35s ease;
+  }
+
+  .market-orbit-pulse {
+    opacity: 0;
+    transform: scale(0.85);
+    box-shadow: 0 0 0 0 rgba(22, 139, 255, 0.45);
+  }
+
+  .market-orbit-btn.is-active .market-orbit-pulse {
+    opacity: 1;
+    animation: market-pulse-ring 2.4s ease-out infinite;
   }
 
   .market-orbit-btn.is-active .market-orbit-icon {
@@ -155,6 +195,129 @@ const icons: Record<string, string> = {
     opacity: 1;
   }
 
+  .market-orbit-ring--outer {
+    animation: market-orbit-spin 48s linear infinite;
+  }
+
+  .market-orbit-ring--inner {
+    animation: market-orbit-spin 32s linear infinite reverse;
+  }
+
+  .market-orbit-glow {
+    animation: market-glow-breathe 4.5s ease-in-out infinite;
+  }
+
+  .market-orbit-scan {
+    border-radius: 9999px;
+    overflow: hidden;
+    mask-image: radial-gradient(circle, black 42%, transparent 70%);
+  }
+
+  .market-orbit-scan::after {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(22, 139, 255, 0.22) 28deg, transparent 56deg);
+    animation: market-scan-sweep 6s linear infinite;
+  }
+
+  .market-orbit-particles span {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 9999px;
+    background: rgba(22, 139, 255, 0.75);
+    box-shadow: 0 0 10px rgba(22, 139, 255, 0.55);
+    animation: market-particle-drift 7s ease-in-out infinite;
+  }
+
+  .market-orbit-particles span:nth-child(1) {
+    top: 8%;
+    left: 50%;
+    animation-delay: 0s;
+  }
+
+  .market-orbit-particles span:nth-child(2) {
+    top: 22%;
+    right: 12%;
+    animation-delay: -1.2s;
+  }
+
+  .market-orbit-particles span:nth-child(3) {
+    bottom: 18%;
+    right: 8%;
+    animation-delay: -2.4s;
+  }
+
+  .market-orbit-particles span:nth-child(4) {
+    bottom: 8%;
+    left: 48%;
+    animation-delay: -3.6s;
+  }
+
+  .market-orbit-particles span:nth-child(5) {
+    bottom: 22%;
+    left: 10%;
+    animation-delay: -4.8s;
+  }
+
+  .market-orbit-particles span:nth-child(6) {
+    top: 42%;
+    left: 4%;
+    animation-delay: -6s;
+  }
+
+  @keyframes market-orbit-spin {
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  @keyframes market-scan-sweep {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes market-glow-breathe {
+    0%,
+    100% {
+      opacity: 0.65;
+      transform: translate(-50%, -50%) scale(0.92);
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+  }
+
+  @keyframes market-pulse-ring {
+    0% {
+      transform: scale(0.85);
+      box-shadow: 0 0 0 0 rgba(22, 139, 255, 0.45);
+    }
+    70% {
+      transform: scale(1.35);
+      box-shadow: 0 0 0 14px rgba(22, 139, 255, 0);
+    }
+    100% {
+      transform: scale(1.35);
+      box-shadow: 0 0 0 0 rgba(22, 139, 255, 0);
+    }
+  }
+
+  @keyframes market-particle-drift {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.35;
+    }
+    50% {
+      transform: translate(6px, -10px) scale(1.35);
+      opacity: 0.95;
+    }
+  }
+
   @media (min-width: 640px) {
     .market-orbit-icon {
       width: 5rem;
@@ -176,12 +339,30 @@ const icons: Record<string, string> = {
       height: 3rem;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .market-orbit-ring,
+    .market-orbit-glow,
+    .market-orbit-scan::after,
+    .market-orbit-particles span,
+    .market-orbit-btn.is-active .market-orbit-pulse {
+      animation: none !important;
+    }
+
+    .market-orbit-icon {
+      transition: none;
+    }
+  }
 </style>
 
 <script>
   import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
   import { markets } from '../content/site';
 
+  gsap.registerPlugin(ScrollTrigger);
+
+  const section = document.querySelector<HTMLElement>('.markets-orbit');
   const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-market-tab]'));
   const label = document.querySelector<HTMLElement>('[data-market-label]');
   const sub = document.querySelector<HTMLElement>('[data-market-sub]');
@@ -189,18 +370,110 @@ const icons: Record<string, string> = {
   const points = document.querySelector<HTMLElement>('[data-market-points]');
   const panel = document.getElementById('market-orbit-panel');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   let active = 2;
   let timer: number | undefined;
+  let floatTweens: gsap.core.Tween[] = [];
 
-  const renderPoints = (items: readonly string[]) => {
+  const renderPoints = (items: readonly string[], animate = false) => {
     if (!points) return;
     points.innerHTML = items
       .map(
         (point) =>
-          `<li class="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/75">${point}</li>`,
+          `<li class="market-orbit-point rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/75">${point}</li>`,
       )
       .join('');
+
+    if (animate && !reduceMotion) {
+      gsap.fromTo(
+        points.querySelectorAll('.market-orbit-point'),
+        { opacity: 0, y: 12, scale: 0.92 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.4, stagger: 0.06, ease: 'back.out(1.7)' },
+      );
+    }
+  };
+
+  const killFloats = () => {
+    floatTweens.forEach((tween) => tween.kill());
+    floatTweens = [];
+  };
+
+  const initIconFloats = () => {
+    if (reduceMotion) return;
+    killFloats();
+
+    tabs.forEach((tab, index) => {
+      if (tab.classList.contains('is-active')) return;
+      const icon = tab.querySelector<HTMLElement>('.market-orbit-icon');
+      if (!icon) return;
+
+      floatTweens.push(
+        gsap.to(icon, {
+          y: -6,
+          duration: 2.2 + index * 0.15,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+          delay: index * 0.12,
+        }),
+      );
+    });
+  };
+
+  const initScrollReveal = () => {
+    if (!section || reduceMotion) return;
+
+    gsap.from('.market-orbit-intro > *', {
+      scrollTrigger: {
+        trigger: '.market-orbit-intro',
+        start: 'top 82%',
+        once: true,
+      },
+      y: 36,
+      opacity: 0,
+      duration: 0.85,
+      stagger: 0.08,
+      ease: 'power3.out',
+    });
+
+    gsap.from('.market-orbit-stage', {
+      scrollTrigger: {
+        trigger: '.market-orbit-stage',
+        start: 'top 85%',
+        once: true,
+      },
+      y: 48,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out',
+    });
+
+    gsap.from('.market-orbit-btn', {
+      scrollTrigger: {
+        trigger: '.market-orbit-row',
+        start: 'top 88%',
+        once: true,
+      },
+      y: 32,
+      opacity: 0,
+      scale: 0.82,
+      duration: 0.7,
+      stagger: 0.07,
+      ease: 'back.out(1.6)',
+      onComplete: initIconFloats,
+    });
+
+    gsap.to('.market-orbit-ambient', {
+      y: -40,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1.2,
+      },
+    });
   };
 
   const setActive = (index: number, animate = true) => {
@@ -211,7 +484,15 @@ const icons: Record<string, string> = {
       const on = i === active;
       tab.classList.toggle('is-active', on);
       tab.setAttribute('aria-selected', String(on));
+
+      const icon = tab.querySelector<HTMLElement>('.market-orbit-icon');
+      if (icon && !reduceMotion) {
+        gsap.killTweensOf(icon);
+        gsap.set(icon, { y: 0 });
+      }
     });
+
+    initIconFloats();
 
     if (panel) panel.setAttribute('aria-labelledby', `market-tab-${active}`);
 
@@ -219,7 +500,7 @@ const icons: Record<string, string> = {
       if (label) label.textContent = market.title;
       if (sub) sub.textContent = market.subtitle;
       if (copy) copy.textContent = market.detail;
-      renderPoints(market.points);
+      renderPoints(market.points, animate && !reduceMotion);
     };
 
     if (!animate || reduceMotion) {
@@ -227,30 +508,53 @@ const icons: Record<string, string> = {
       return;
     }
 
-    const targets = [label, sub, copy, points].filter(Boolean);
+    const targets = [label, sub, copy].filter(Boolean);
     gsap.to(targets, {
       opacity: 0,
-      y: 8,
-      duration: 0.18,
+      y: 10,
+      filter: 'blur(4px)',
+      duration: 0.2,
       ease: 'power2.in',
       onComplete: () => {
+        if (points) gsap.set(points, { opacity: 0 });
         updateText();
         gsap.fromTo(
           targets,
-          { opacity: 0, y: -8 },
-          { opacity: 1, y: 0, duration: 0.28, ease: 'power2.out', stagger: 0.04 },
+          { opacity: 0, y: -14, filter: 'blur(6px)' },
+          {
+            opacity: 1,
+            y: 0,
+            filter: 'blur(0px)',
+            duration: 0.42,
+            ease: 'power3.out',
+            stagger: 0.05,
+          },
         );
+        if (points) {
+          gsap.to(points, { opacity: 1, duration: 0.25, delay: 0.08 });
+        }
       },
     });
 
-    const activeBtn = tabs[active]?.querySelector('.market-orbit-icon');
-    if (activeBtn) {
+    const activeIcon = tabs[active]?.querySelector('.market-orbit-icon');
+    if (activeIcon) {
       gsap.fromTo(
-        activeBtn,
-        { scale: 0.86 },
-        { scale: 1, duration: 0.45, ease: 'back.out(1.6)' },
+        activeIcon,
+        { scale: 0.78, rotate: -8 },
+        { scale: 1, rotate: 0, duration: 0.55, ease: 'back.out(2)' },
       );
     }
+
+    tabs.forEach((tab, i) => {
+      if (i === active || reduceMotion) return;
+      const icon = tab.querySelector('.market-orbit-icon');
+      if (!icon) return;
+      gsap.to(icon, {
+        scale: 0.94,
+        duration: 0.35,
+        ease: 'power2.out',
+      });
+    });
   };
 
   const start = () => {
@@ -265,7 +569,7 @@ const icons: Record<string, string> = {
       start();
     });
     tab.addEventListener('pointerenter', () => {
-      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      if (!finePointer) return;
       setActive(index);
       window.clearInterval(timer);
     });
@@ -273,5 +577,6 @@ const icons: Record<string, string> = {
   });
 
   setActive(2, false);
+  initScrollReveal();
   start();
 </script>
