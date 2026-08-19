@@ -6,8 +6,9 @@ import Logo from './Logo.astro';
 <section class="section-pad pt-0">
   <div class="container-shell">
     <div
-      class="rebate-panel relative overflow-hidden rounded-[1.5rem] border border-line bg-gradient-to-br from-mist via-white to-[#dce6f2] px-5 py-10 sm:rounded-[2rem] sm:px-10 sm:py-12 lg:px-14"
+      class="rebate-panel mech-corners relative overflow-hidden border border-line bg-gradient-to-br from-mist via-white to-[#dce6f2] px-4 py-8 sm:px-10 sm:py-12 lg:px-14"
     >
+      <div class="hatch-overlay pointer-events-none absolute inset-0 opacity-60" aria-hidden="true"></div>
       <div
         class="pointer-events-none absolute -right-10 top-0 h-56 w-56 rounded-full bg-signal/20 blur-3xl"
         aria-hidden="true"
@@ -19,35 +20,35 @@ import Logo from './Logo.astro';
         decorative
         class="pointer-events-none absolute -right-6 bottom-[-10%] h-28 w-auto opacity-[0.08] sm:h-40"
       />
-      <div class="relative grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+      <div class="relative grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:gap-8">
         <div>
-          <Logo variant="pill" class="mb-5 h-9 w-auto sm:h-10" />
+          <Logo variant="pill" class="mb-4 h-9 w-auto sm:mb-5 sm:h-10" />
           <p class="eyebrow">Infinite Self Rebate</p>
-          <h2 class="headline mt-3 text-[1.7rem] sm:text-4xl">Every lot you trade can earn real cashback</h2>
+          <h2 class="headline mt-3 text-[1.55rem] sm:text-4xl">Every lot you trade can earn real cashback</h2>
           <p class="lede mt-4">
             Accumulate 8 points per lot on your MT5 Infinite account and redeem for instant rewards.
             Cashback rate: $8 per lot.
           </p>
-          <a href={links.register} class="btn-primary btn-magnetic mt-8 w-full sm:w-auto">Start Earning Now</a>
+          <a href={links.register} class="btn-primary btn-magnetic mt-7 w-full sm:mt-8 sm:w-auto">Start Earning Now</a>
         </div>
-        <div class="grid gap-3 sm:grid-cols-3 sm:gap-4">
-          <div class="rounded-2xl bg-ink p-4 text-white transition duration-300 hover:-translate-y-1 sm:p-5">
-            <p class="text-[10px] uppercase tracking-[0.16em] text-white/50">Cashback</p>
-            <p class="mt-2 font-display text-2xl font-bold text-signal sm:text-3xl">$8/lot</p>
+        <div class="grid grid-cols-3 gap-2 sm:gap-4">
+          <div class="bg-ink p-3 text-white transition duration-300 hover:-translate-y-1 sm:p-5">
+            <p class="font-mono text-[9px] uppercase tracking-[0.16em] text-white/50 sm:text-[10px]">Cashback</p>
+            <p class="mt-1 font-display text-lg font-bold text-signal sm:mt-2 sm:text-3xl">$8/lot</p>
           </div>
-          <div class="rounded-2xl border border-line bg-white/80 p-4 transition duration-300 hover:-translate-y-1 sm:p-5">
-            <p class="text-[10px] uppercase tracking-[0.16em] text-muted">Points</p>
+          <div class="border border-line bg-white/80 p-3 transition duration-300 hover:-translate-y-1 sm:p-5">
+            <p class="font-mono text-[9px] uppercase tracking-[0.16em] text-muted sm:text-[10px]">Points</p>
             <p
-              class="mt-2 font-display text-2xl font-bold text-ink tabular-nums sm:text-3xl"
+              class="mt-1 font-display text-lg font-bold text-ink tabular-nums sm:mt-2 sm:text-3xl"
               data-count="8"
               data-suffix=" pts"
             >
               0 pts
             </p>
           </div>
-          <div class="flex items-center justify-between gap-3 rounded-2xl border border-line bg-white/80 p-4 transition duration-300 hover:-translate-y-1 sm:block sm:p-5">
-            <p class="text-[10px] uppercase tracking-[0.16em] text-muted">Account</p>
-            <Logo variant="pill" class="h-8 w-auto sm:mt-3" />
+          <div class="flex flex-col justify-between border border-line bg-white/80 p-3 transition duration-300 hover:-translate-y-1 sm:p-5">
+            <p class="font-mono text-[9px] uppercase tracking-[0.16em] text-muted sm:text-[10px]">Account</p>
+            <Logo variant="pill" class="mt-2 h-6 w-auto sm:mt-3 sm:h-8" />
           </div>
         </div>
       </div>

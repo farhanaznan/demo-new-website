@@ -12,13 +12,13 @@ import Logo from './Logo.astro';
       <Logo variant="pill" class="h-9 w-auto sm:h-11" />
     </a>
 
-    <nav class="hidden items-center gap-7 lg:flex" aria-label="Primary">
+    <nav class="hidden items-center gap-6 xl:gap-7 lg:flex" aria-label="Primary">
       {
         nav.map((item) => (
           <a
             href={item.href}
             class:list={[
-              'nav-link text-sm font-medium text-ink-soft/80 transition hover:text-ocean',
+              'nav-link text-ink-soft/80 transition hover:text-ocean',
               item.href === '/promotion' && Astro.url.pathname.startsWith('/promotion')
                 ? 'is-active'
                 : '',
@@ -36,12 +36,18 @@ import Logo from './Logo.astro';
     </nav>
 
     <div class="flex shrink-0 items-center gap-2">
+      <span
+        class="hidden items-center gap-2 border border-line bg-white/70 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted md:inline-flex"
+      >
+        <span class="live-dot h-1.5 w-1.5 rounded-full bg-signal"></span>
+        Sys.online
+      </span>
       <a href={links.login} class="btn-secondary hidden px-4 py-2.5 lg:inline-flex">Log In</a>
       <a href={links.register} class="btn-primary hidden px-4 py-2.5 lg:inline-flex">Sign Up</a>
       <button
         id="nav-toggle"
         type="button"
-        class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-line bg-white/80 lg:hidden"
+        class="inline-flex h-10 w-10 items-center justify-center border border-line bg-white/85 lg:hidden"
         aria-expanded="false"
         aria-controls="mobile-nav"
         aria-label="Open menu"
@@ -54,16 +60,16 @@ import Logo from './Logo.astro';
     </div>
   </div>
 
-  <div id="mobile-nav" class="hidden border-t border-line bg-white/95 lg:hidden">
+  <div id="mobile-nav" class="hidden border-t border-line bg-[#0b2545] lg:hidden">
     <nav class="container-shell flex flex-col gap-1 py-3" aria-label="Mobile">
       {
         nav.map((item) => (
           <a
             href={item.href}
             class:list={[
-              'rounded-md px-3 py-3 text-sm font-medium text-ink hover:bg-mist',
+              'border border-transparent px-3 py-3 font-mono text-xs uppercase tracking-[0.18em] text-white/80 hover:border-signal/40 hover:bg-white/5 hover:text-white',
               item.href === '/promotion' && Astro.url.pathname.startsWith('/promotion')
-                ? 'bg-mist text-ocean'
+                ? 'border-signal/40 bg-white/5 text-white'
                 : '',
             ]}
           >
@@ -71,7 +77,9 @@ import Logo from './Logo.astro';
           </a>
         ))
       }
-      <a href={links.login} class="rounded-md px-3 py-3 text-sm font-medium text-ink hover:bg-mist"
+      <a
+        href={links.login}
+        class="px-3 py-3 font-mono text-xs uppercase tracking-[0.18em] text-white/80 hover:text-white"
         >Log In</a
       >
       <a href={links.register} class="btn-primary mt-2 w-full">Sign Up</a>
@@ -88,8 +96,8 @@ import Logo from './Logo.astro';
     if (!header) return;
     const scrolled = window.scrollY > 12;
     header.classList.toggle('border-line/80', scrolled);
-    header.classList.toggle('bg-white/85', scrolled);
-    header.classList.toggle('shadow-[0_8px_30px_rgba(7,24,34,0.06)]', scrolled);
+    header.classList.toggle('bg-white/90', scrolled);
+    header.classList.toggle('shadow-[0_8px_30px_rgba(7,24,34,0.08)]', scrolled);
     header.classList.toggle('backdrop-blur-md', scrolled);
   };
 

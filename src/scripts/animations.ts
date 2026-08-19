@@ -94,7 +94,7 @@ function initHero(reduceMotion: boolean): void {
 
   if (reduceMotion) {
     gsap.set(
-      ['.hero-brand', '.hero-letter', '.hero-title', '.hero-copy', '.hero-cta', '.hero-visual', '.hero-visual-mobile', '.float-chip', '.stats-panel'],
+      ['.hero-kicker', '.hero-brand', '.hero-letter', '.hero-title', '.hero-copy', '.hero-cta', '.hero-visual', '.hero-visual-mobile', '.float-chip', '.stats-panel'],
       { clearProps: 'all', opacity: 1 },
     );
     return;
@@ -103,14 +103,16 @@ function initHero(reduceMotion: boolean): void {
   const tl = gsap.timeline({
     defaults: { ease: 'power3.out' },
     onComplete: () => {
-      gsap.set(['.hero-cta > *', '.hero-title', '.hero-copy', '.hero-brand', '.stats-panel'], {
+      gsap.set(['.hero-cta > *', '.hero-title', '.hero-copy', '.hero-brand', '.hero-kicker', '.stats-panel'], {
         clearProps: 'opacity,transform',
       });
     },
   });
 
+  tl.from('.hero-kicker', { y: 16, opacity: 0, duration: 0.5 });
+
   if (isImageBrand) {
-    tl.from('.hero-brand', { y: 28, opacity: 0, scale: 0.96, duration: 0.85 });
+    tl.from('.hero-brand', { y: 28, opacity: 0, scale: 0.96, duration: 0.85 }, '-=0.2');
   } else {
     tl.from('.hero-letter', {
       yPercent: 120,
@@ -452,6 +454,7 @@ function initSeaCustomers(reduceMotion: boolean): void {
     });
 
     document.querySelectorAll<HTMLElement>('.sea-marquee').forEach((row, index) => {
+      if (window.getComputedStyle(row.parentElement || row).display === 'none') return;
       const track = row.querySelector<HTMLElement>('.sea-marquee-track');
       if (!track) return;
 
