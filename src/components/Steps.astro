@@ -9,7 +9,7 @@ import { links, steps } from '../content/site';
         <p class="eyebrow">Get started</p>
         <h2 class="headline mt-3">Open an account in 4 simple steps</h2>
       </div>
-      <a href={links.register} class="btn-primary btn-magnetic w-fit">Open Account Now</a>
+      <a href={links.register} class="btn-primary btn-magnetic w-full sm:w-auto">Open Account Now</a>
     </div>
 
     <div class="relative mt-12">
@@ -23,7 +23,7 @@ import { links, steps } from '../content/site';
       <ol class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         {
           steps.map((item) => (
-            <li class="step-item relative rounded-2xl border border-line bg-white/70 p-6 transition duration-300">
+            <li class="step-item relative rounded-2xl border border-line bg-white/70 p-5 transition duration-300 sm:p-6">
               <p class="font-display text-4xl font-bold text-signal/50 transition duration-300">
                 {item.step}
               </p>

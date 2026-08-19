@@ -1,11 +1,13 @@
 ---
 import { brand, links, whyUs } from '../content/site';
+import Logo from './Logo.astro';
 ---
 
 <section id="banking" class="section-pad pt-0">
   <div class="container-shell">
     <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
       <div class="section-intro">
+        <Logo variant="pill" class="mb-5 h-9 w-auto sm:h-10" />
         <p class="eyebrow">Why {brand.name}</p>
         <h2 class="headline mt-3">Your funds. Always protected.</h2>
         <p class="lede mt-4">
@@ -26,7 +28,7 @@ import { brand, links, whyUs } from '../content/site';
             Global market access with transparent costs
           </li>
         </ul>
-        <a href={links.register} class="btn-primary btn-magnetic mt-8">Create Free Account</a>
+        <a href={links.register} class="btn-primary btn-magnetic mt-8 w-full sm:w-auto">Create Free Account</a>
       </div>
 
       <div class="grid gap-4 sm:grid-cols-2">

@@ -18,14 +18,15 @@ const countMeta: Record<string, CountMeta> = {
 };
 ---
 
-<section class="relative z-10 -mt-6 px-5 sm:px-8 lg:px-12" aria-label="Key trading conditions">
-  <div class="container-shell surface stats-panel rounded-2xl px-4 py-5 shadow-[0_20px_50px_rgba(7,24,34,0.08)] sm:px-6">
-    <ul class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 lg:gap-2">
+<section class="relative z-10 -mt-4 sm:-mt-6" aria-label="Key trading conditions">
+  <div class="container-shell">
+    <div class="surface stats-panel rounded-2xl px-3 py-4 shadow-[0_20px_50px_rgba(7,24,34,0.08)] sm:px-6 sm:py-5">
+    <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5 lg:gap-2">
       {
         stats.map((item) => {
           const meta = countMeta[item.value];
           return (
-            <li class="stat-item group px-2 py-2 text-center transition duration-300 hover:-translate-y-0.5 sm:text-left">
+            <li class="stat-item group px-2 py-2 text-center transition duration-300 hover:-translate-y-0.5 last:col-span-2 sm:last:col-span-1 sm:text-left lg:last:col-span-1">
               <p
                 class="font-display text-2xl font-bold tracking-tight text-ink tabular-nums sm:text-3xl"
                 data-count={meta.count}
@@ -43,5 +44,6 @@ const countMeta: Record<string, CountMeta> = {
         })
       }
     </ul>
+    </div>
   </div>
 </section>

@@ -86,13 +86,13 @@ const rowB = [...seaCustomers].reverse();
 
   <!-- Interactive country grid -->
   <div class="container-shell mt-14">
-    <ul class="sea-grid grid gap-3 sm:grid-cols-2 lg:grid-cols-5" role="list">
+    <ul class="sea-grid grid grid-cols-2 gap-3 lg:grid-cols-5" role="list">
       {
         seaCustomers.map((country, index) => (
           <li>
             <button
               type="button"
-              class="sea-card group relative w-full overflow-hidden rounded-2xl border border-line bg-white/75 p-4 text-left transition duration-300"
+              class="sea-card group relative w-full overflow-hidden rounded-2xl border border-line bg-white/75 p-3 text-left transition duration-300 sm:p-4"
               data-sea-card
               data-index={index}
               aria-pressed={index === 0 ? 'true' : 'false'}
@@ -110,10 +110,10 @@ const rowB = [...seaCustomers].reverse();
                   <span class="sea-pulse absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-signal ring-2 ring-white">
                   </span>
                 </span>
-                <span class="block font-display text-base font-bold text-ink">{country.name}</span>
+                <span class="block font-display text-sm font-bold text-ink sm:text-base">{country.name}</span>
               </div>
               <div class="mt-4 flex items-end justify-between gap-2">
-                <p class="font-display text-2xl font-bold tabular-nums text-ocean">
+                <p class="font-display text-xl font-bold tabular-nums text-ocean sm:text-2xl">
                   <span data-sea-count={country.traders}>0</span>
                   <span class="text-base">+</span>
                 </p>

@@ -1,5 +1,7 @@
 ---
 import { links, performance } from '../content/site';
+import BrandWatermark from './BrandWatermark.astro';
+import Logo from './Logo.astro';
 
 const countMeta: Record<
   string,
@@ -12,9 +14,11 @@ const countMeta: Record<
 ---
 
 <section class="section-pad">
-  <div class="container-shell overflow-hidden rounded-[2rem] bg-ink px-6 py-14 text-white sm:px-10 lg:px-14">
-    <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+  <div class="container-shell relative overflow-hidden rounded-[1.5rem] bg-ink px-5 py-10 text-white sm:rounded-[2rem] sm:px-10 sm:py-14 lg:px-14">
+    <BrandWatermark class="-right-10 bottom-[-20%] opacity-[0.14] sm:-right-4" />
+    <div class="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
       <div class="section-intro">
+        <Logo tone="on-dark" class="mb-5 h-10 w-auto sm:h-12" />
         <p class="text-xs font-semibold uppercase tracking-[0.22em] text-signal">Performance</p>
         <h2 class="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
           Our results speak for themselves
@@ -23,7 +27,7 @@ const countMeta: Record<
           Empowering traders with consistent, transparent, and lightning-fast trading conditions
           across global markets.
         </p>
-        <a href={links.register} class="btn-primary btn-magnetic mt-8"
+        <a href={links.register} class="btn-primary btn-magnetic mt-8 w-full sm:w-auto"
           >Start Trading Now</a
         >
       </div>
@@ -35,7 +39,7 @@ const countMeta: Record<
             return (
               <div class="perf-item border-t border-white/10 pt-5 first:border-t-0 first:pt-0 sm:border-t-0 sm:pt-0 lg:border-t lg:pt-5 lg:first:border-t-0 lg:first:pt-0">
                 <p
-                  class="font-display text-4xl font-bold text-signal tabular-nums sm:text-5xl"
+                  class="font-display text-3xl font-bold text-signal tabular-nums sm:text-5xl"
                   data-count={meta.count}
                   data-prefix={meta.prefix || ''}
                   data-suffix={meta.suffix || ''}
