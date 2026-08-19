@@ -78,7 +78,9 @@ function initActiveNav(): void {
 
 function initHero(reduceMotion: boolean): void {
   const brand = document.querySelector<HTMLElement>('.hero-brand');
-  if (brand && !brand.dataset.split) {
+  const isImageBrand = Boolean(brand?.querySelector('img'));
+
+  if (brand && !brand.dataset.split && !isImageBrand) {
     const text = brand.textContent?.trim() || '';
     brand.dataset.split = 'true';
     brand.innerHTML = text
@@ -92,7 +94,7 @@ function initHero(reduceMotion: boolean): void {
 
   if (reduceMotion) {
     gsap.set(
-      ['.hero-letter', '.hero-title', '.hero-copy', '.hero-cta', '.hero-visual', '.float-chip', '.stats-panel'],
+      ['.hero-brand', '.hero-letter', '.hero-title', '.hero-copy', '.hero-cta', '.hero-visual', '.float-chip', '.stats-panel'],
       { clearProps: 'all', opacity: 1 },
     );
     return;
@@ -101,21 +103,26 @@ function initHero(reduceMotion: boolean): void {
   const tl = gsap.timeline({
     defaults: { ease: 'power3.out' },
     onComplete: () => {
-      gsap.set(['.hero-cta > *', '.hero-title', '.hero-copy', '.stats-panel'], {
+      gsap.set(['.hero-cta > *', '.hero-title', '.hero-copy', '.hero-brand', '.stats-panel'], {
         clearProps: 'opacity,transform',
       });
     },
   });
 
-  tl.from('.hero-letter', {
-    yPercent: 120,
-    opacity: 0,
-    rotateX: -40,
-    duration: 0.8,
-    stagger: 0.05,
-    transformOrigin: '50% 100%',
-  })
-    .from('.hero-title', { y: 48, opacity: 0, duration: 0.9 }, '-=0.45')
+  if (isImageBrand) {
+    tl.from('.hero-brand', { y: 28, opacity: 0, scale: 0.96, duration: 0.85 });
+  } else {
+    tl.from('.hero-letter', {
+      yPercent: 120,
+      opacity: 0,
+      rotateX: -40,
+      duration: 0.8,
+      stagger: 0.05,
+      transformOrigin: '50% 100%',
+    });
+  }
+
+  tl.from('.hero-title', { y: 48, opacity: 0, duration: 0.9 }, '-=0.45')
     .from('.hero-copy', { y: 28, opacity: 0, duration: 0.75 }, '-=0.5')
     .from('.hero-cta', { y: 20, opacity: 0, duration: 0.6 }, '-=0.4')
     .from('.hero-visual', { x: 60, opacity: 0, duration: 1.05 }, '-=0.7')

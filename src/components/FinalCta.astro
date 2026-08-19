@@ -1,29 +1,30 @@
 ---
 import { brand, links } from '../content/site';
+import Logo from './Logo.astro';
 ---
 
 <section class="section-pad pt-0 pb-24">
   <div class="container-shell">
     <div
-      class="final-cta relative overflow-hidden rounded-[2rem] bg-[linear-gradient(135deg,#0a4d68_0%,#071822_55%,#0f766e_100%)] px-6 py-14 text-center text-white sm:px-10"
+      class="final-cta relative overflow-hidden rounded-[2rem] bg-[linear-gradient(135deg,#06172D_0%,#08111F_45%,#168BFF_160%)] px-6 py-14 text-center text-white sm:px-10"
     >
       <div
-        class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(20,184,166,0.35),transparent_40%),radial-gradient(circle_at_80%_80%,rgba(255,255,255,0.08),transparent_35%)]"
+        class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(22,139,255,0.35),transparent_40%),radial-gradient(circle_at_80%_80%,rgba(255,255,255,0.08),transparent_35%)]"
         aria-hidden="true"
       >
       </div>
       <div class="relative mx-auto max-w-2xl">
-        <p class="font-display text-4xl font-extrabold tracking-[0.12em] sm:text-5xl">{brand.name}</p>
-        <h2 class="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+        <div class="mx-auto flex justify-center">
+          <Logo tone="on-dark" class="mx-auto h-16 w-auto object-center sm:h-20" />
+        </div>
+        <h2 class="mt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">
           Be better. Build a brighter future.
         </h2>
         <p class="mt-4 text-base leading-relaxed text-white/70">
           Join traders who trust {brand.name} to power their journey in the global markets.
         </p>
         <div class="mt-8 flex flex-wrap justify-center gap-3">
-          <a href={links.register} class="btn-primary btn-magnetic bg-signal text-ink hover:bg-white"
-            >Start Trading Now</a
-          >
+          <a href={links.register} class="btn-primary btn-magnetic">Start Trading Now</a>
           <a
             href={links.login}
             class="btn-secondary btn-magnetic border-white/25 bg-transparent text-white hover:border-white hover:text-white"

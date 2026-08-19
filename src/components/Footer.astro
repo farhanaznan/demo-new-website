@@ -1,25 +1,19 @@
 ---
 import { brand, links, nav } from '../content/site';
+import Logo from './Logo.astro';
 ---
 
 <footer class="border-t border-line bg-ink text-white">
   <div class="container-shell section-pad !py-16">
     <div class="grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr]">
       <div>
-        <div class="flex items-center gap-2.5">
-          <span class="grid h-9 w-9 place-items-center rounded-full bg-signal text-sm font-bold text-ink"
-            >{brand.mark}</span
-          >
-          <span class="font-display text-xl tracking-[0.08em]">{brand.name}</span>
-        </div>
+        <Logo tone="on-dark" class="h-12 w-auto sm:h-14" />
         <p class="mt-5 max-w-md text-sm leading-relaxed text-white/70">
           Welcome to {brand.name}, where trading meets clarity. With a powerful platform and
           disciplined market access, we help traders pursue growth with precision and control.
         </p>
         <div class="mt-6 flex flex-wrap gap-3">
-          <a href={links.register} class="btn-primary bg-signal text-ink hover:bg-white"
-            >Start Trading</a
-          >
+          <a href={links.register} class="btn-primary">Start Trading</a>
           <a
             href={links.login}
             class="btn-secondary border-white/20 bg-transparent text-white hover:border-white hover:text-white"
